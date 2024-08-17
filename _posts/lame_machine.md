@@ -1,0 +1,86 @@
+---
+title: HackTheBox_Lame | w Metasploit
+date: 2024-07-12 12:00:00 -500
+categories: [hackthebox,CTF,writeups]
+tags: [ctf,hackthebox,writeup,linux,easy] #lowercase always
+---
+
+## HTB - Lame
+
+## Overview
+
+![Descriptive information card about this machine](/assets/img/lame/Lame.png)
+
+Lame is a beginner-friendly Linux machine on Hack The Box that introduces basic enumeration and exploitation techniques, focusing on well-known vulnerabilities.
+
+## Useful Skills and Tools
+
+### Nmap
+
+Understanding how to perform detailed network scans and interpret the results is essential.
+
+### Metasploit
+
+Basic usage of Metasploit for exploiting known vulnerabilities can speed up the exploitation process.
+
+## Enumeration
+
+### Nmap Scan
+
+I started my enumeration with an nmap scan of `10.10.10.xxx`. The options I regularly use are:
+
+| `Flag` | Purpose |
+| :--- | :--- |
+| `-p-` | A shortcut which tells nmap to scan all ports |
+| `-vvv` | Gives very verbose output so I can see the results as they are found, and also includes some information not normally shown |
+| `-sC` | Equivalent to `--script=default` and runs a collection of nmap enumeration scripts against the target |
+| `-sV` | Does a service version scan |
+| `-oA $name` | Saves all three formats \(standard, greppable, and XML\) of output with a filename of `$name` |
+
+nmap scan results:
+
+![lame_nmap](/assets/img/lame/1.png)
+
+![lame_nmap](/assets/img/lame/2.png)
+
+## Initial Foothold
+
+### Vulnerabilities
+
+**PORT 21/tcp**
+
+vsftpd 2.3.4 backdoor
+
+![metasploit](/assets/img/lame/3.png)
+
+**PORT 445/tcp**
+
+samba smbd 3.0.20-Debian
+
+**CVE-2007-2447** **25rc3** allows remote attackers to execute arbitrary commands via shell metacharacters involving the (1) SamrChangePassword function, when the "username map script" smb.
+
+## Road to User
+
+### Exploitation
+
+Using metasploit to execute the backdoor attack:
+
+![Untitled](/assets/img/lame/4.png)
+
+![Untitled](/assets/img/lame/5.png)
+
+So apparently, the backdoor exploit does not work. We will now try another vulnerability that we had found.
+
+![Untitled](/assets/img/lame/6.png)
+
+The samba exploit works, now time to grab our flags.
+
+![Untitled](/assets/img/lame/7.png)
+
+## Path to Power \(Gaining Administrator Access\)
+
+No further steps required for root access as the samba exploit directly gives us the shell. The flag can be captured immediately after gaining access.
+
+pwned.
+
+
