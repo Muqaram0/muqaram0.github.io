@@ -16,7 +16,7 @@ timezone: Asia/Dubai
 
 title: Muqaram Majid # the main title
 
-tagline: Hack The Box write-ups and documentation for my projects  # it will display as the sub-title
+tagline: CTF write-ups and documentation for my projects  # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
   CTF write-ups and documentation for my projects 
