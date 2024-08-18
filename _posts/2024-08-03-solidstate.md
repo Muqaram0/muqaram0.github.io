@@ -178,7 +178,7 @@ But I don't think this is the intended way of getting a bash shell in this box.
 
 Lets try using an exploit instead
 
-![Image](/assets/img/Solidstate/image_15.png)
+![Image](/assets/img/solidstate/image_15.png)
 
 We will use the 4th option
 
