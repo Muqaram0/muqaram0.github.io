@@ -53,8 +53,7 @@ order: 2
 <div align="center">
 <h2>Useful Links</h2>
 </div>
-
-<div align="center">
+  
 
 | **Description** | **Link** |
 | --- | --- |
@@ -63,4 +62,3 @@ order: 2
 | Crontab Guru | [Crontab Guru](https://crontab.guru/) |
 | PHP reverse shell | [PHP Reverse Shell](https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php) |
 
-</div>
