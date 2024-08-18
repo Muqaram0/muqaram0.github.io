@@ -19,7 +19,7 @@ title: Muqaram Majid # the main title
 tagline: Hack The Box write-ups and documentation for my projects  # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
-  Hack The Box write-ups and documentation for my projects 
+  CTF write-ups and documentation for my projects 
 
 # Fill in the protocol & hostname for your site.
 # e.g. 'https://username.github.io', note that it does not end with a '/'.
@@ -107,10 +107,10 @@ toc: true
 
 comments:
   # Global switch for the post comment system. Keeping it empty means disabled.
-  provider: # [disqus | utterances | giscus]
+  provider: disqus # [disqus | utterances | giscus]
   # The provider options are as follows:
   disqus:
-    shortname: # fill with the Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
+    shortname: muqaram0 # fill with the Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
   # utterances settings › https://utteranc.es/
   utterances:
     repo: # <gh-username>/<repo>
