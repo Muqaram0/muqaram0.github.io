@@ -8,7 +8,9 @@ tags: [ctf,hackthebox,writeup,linux,insane]
 
 ## HTB - Brainfuck
 
-### Enumeration
+![Image](/assets/img/brainfuck/brainfuck.png)
+
+## Enumeration
 
 nmap scan results
 
@@ -62,7 +64,7 @@ lets use wpscan to enumerate the users as well, using the enumerate-user flag
 
 ![Image](/assets/img/brainfuck/Untitled_13.png)
 
-### Vulnerabilities
+## Vulnerabilities
 
 ![Image](/assets/img/brainfuck/Untitled_14.png)
 
@@ -70,7 +72,7 @@ lets check this one out
 
 ![Image](/assets/img/brainfuck/Untitled_15.png)
 
-### Exploitation
+## Exploitation
 
 modifying the script with the credentials we got from our enumeration stage
 

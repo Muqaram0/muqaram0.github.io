@@ -6,13 +6,18 @@ tags: [ctf,hackthebox,writeup,linux,medium]
 ---
 
 ## HTB - SolidState
-### Enumeration
+
+## Overview
+
+![Image](/assets/img/solidstate/solidstate.png)
+
+## Enumeration
 
 #### nmap Scan Results
 
 ![Image](/assets/img/solidstate/image.png)
 
-#### Dirbuster Result
+### Dirbuster Result
 
 ##### Directories Found with a 200 Response
 
@@ -89,11 +94,11 @@ tags: [ctf,hackthebox,writeup,linux,medium]
 ```
 Nothing interesting here
 
-### Vulnerabilities
+## Vulnerabilities
 
 ![Image](/assets/img/solidstate/image_1.png)
 
-### Exploitation
+## Exploitation
 
 #### James Mail Server
 
@@ -152,6 +157,8 @@ Ok so we have our ssh creds now which is mindy:P@55W0rd1!2@
 Mailadmin does not have any which is ironic
 
 ![Image](/assets/img/solidstate/image_11.png)
+
+## User Flag
 
 Right off we have our user flag
 
@@ -282,12 +289,12 @@ We set up a listener on our attacking machine to catch the reverse shell:
 
 Next, we need to wait for the cron job to execute the modified `tmp.py`. Once it runs, we should receive a connection from the target machine.
 
-#### Getting Root
+## Root Flag
 
 After receiving the connection, we will have an elevated shell with root privileges. We can then check for the root flag:
 
 ![Image](/assets/img/solidstate/image_32.png)
 
-Finally, we obtain the root flag
+**pwned**
 
 
