@@ -3,7 +3,7 @@
 icon: fas fa-info-circle
 order: 1
 ---
-![lennart-butz-idea5anim5](https://github.com/Muqaram0/Muqaram0/assets/130496042/c83e26a8-49ae-45c2-9216-b8456038a96b)
+![lennart-butz-idea5anim5](https://github.com/Muqaram0/Muqaram0/assets/130496042/f309e5c0-2a94-4a65-aae0-a80f51f2f9de)
 <div align="center">
   <h1>Hi there! 👋 </h1>
 </div>
