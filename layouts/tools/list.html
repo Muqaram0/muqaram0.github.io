@@ -1,0 +1,63 @@
+﻿{{ define "main" }}
+  {{ .Scratch.Set "scope" "list" }}
+  {{ $toolsPage := .Site.GetPage "/tools/tooly-source" }}
+
+  <article class="ctf-writeups-page tools-native-page" data-tools-page>
+    {{ partial "background/collector-dotgrid.html" . }}
+
+    <header class="tools-catalog-header">
+      <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">{{ .Title }}</h1>
+      <p class="tools-catalog-lead">{{ .Description | default "Searchable quick-reference of tools and commands from my personal workflow" }}</p>
+    </header>
+
+    <section class="tools-search-panel" aria-label="Tools search">
+      <label class="tools-search-label" for="toolsPageSearch">Search</label>
+      <div class="tools-search-input-wrap">
+        <span class="tools-search-icon" aria-hidden="true">/</span>
+        <input
+          id="toolsPageSearch"
+          type="search"
+          class="tools-search-input"
+          placeholder="Search tool/section and press Enter to jump..."
+          autocomplete="off"
+          data-tools-search />
+      </div>
+      <p class="tools-search-hint">Searches headings. Press <code>Enter</code> to jump to first match.</p>
+      <p class="tools-search-count" data-tools-search-count></p>
+    </section>
+
+    <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row tools-body-layout">
+      {{ with $toolsPage }}
+        {{ if in .TableOfContents "<ul" }}
+          <div class="order-first lg:ms-auto px-0 lg:order-last lg:ps-8 lg:max-w-2xs tools-right-toc">
+            <div class="toc ps-5 print:hidden lg:sticky lg:top-10">
+              {{ partial "toc.html" . }}
+            </div>
+          </div>
+        {{ end }}
+
+        <div class="min-w-0 min-h-0 tools-main-column">
+          <div class="article-content mb-20 tools-content-width" data-tools-notes>
+            {{ .Content }}
+          </div>
+        </div>
+      {{ else }}
+        <div class="min-w-0 min-h-0 tools-main-column">
+          <div class="article-content mb-20 tools-content-width" data-tools-notes>
+            {{ .Content }}
+          </div>
+        </div>
+      {{ end }}
+    </section>
+  </article>
+
+  {{ $toolsCatalog := resources.Get "js/tools-catalog.js" }}
+  {{ if $toolsCatalog }}
+    {{ $toolsCatalog = $toolsCatalog | resources.Minify | resources.Fingerprint (.Site.Params.fingerprintAlgorithm | default "sha512") }}
+    <script
+      defer
+      type="text/javascript"
+      src="{{ $toolsCatalog.RelPermalink }}"
+      integrity="{{ $toolsCatalog.Data.Integrity }}"></script>
+  {{ end }}
+{{ end }}

@@ -1,0 +1,27 @@
+﻿{{ define "main" }}
+  {{ .Scratch.Set "scope" "list" }}
+  {{ $oscpRows := index hugo.Data.cheatsheet "oscp-mastercheck" }}
+
+  <article class="ctf-writeups-page cheatsheet-page">
+    {{ partial "background/collector-dotgrid.html" . }}
+
+    <header class="ctf-archive-header">
+      <h1 class="text-4xl font-extrabold text-neutral-900 dark:text-neutral">{{ .Title }}</h1>
+      <p class="ctf-writeups-lead">{{ .Description | default "Pick a cheatsheet module." }}</p>
+    </header>
+
+    <section class="recent-writeups-grid cheatsheet-tiles-grid w-full">
+      <a class="recent-writeup-card cheatsheet-tile border rounded-2xl p-6 block" href="{{ "cheatsheet/oscp-cheatsheet/" | relLangURL }}">
+        <div class="flex items-center justify-between gap-3 mb-3">
+          <h2 class="recent-writeup-title text-3xl font-extrabold text-neutral-100">OSCP Cheatsheet</h2>
+          <span class="recent-writeup-tag text-xs">{{ len $oscpRows }} steps</span>
+        </div>
+        <p class="recent-writeup-summary text-sm leading-7 mb-4">
+          Master methodology checklist with phase tags, operational notes, references, and completion checkboxes.
+        </p>
+        <p class="recent-writeup-meta text-sm">Open database view</p>
+      </a>
+    </section>
+  </article>
+{{ end }}
+

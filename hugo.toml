@@ -1,0 +1,27 @@
+baseURL = 'https://muqaram0.github.io'  # Change this later when deploying
+languageCode = 'en-us'
+title = 'Muqaram Majid'
+theme = 'blowfish'
+
+[params]
+  description = 'Penetration testing tools and commands reference'
+  colorScheme = 'dark'
+
+[params.author]
+  name = 'Muqaram Majid'
+
+[params.home]
+  layout = "custom"  # We'll create a custom homepage
+
+[search]
+  enable = true
+
+[menu]
+  [[menu.main]]
+    name = 'Tools'
+    url = '/tools/'
+    weight = 10
+  [[menu.main]]
+    name = 'Cheatsheet'
+    url = '/cheatsheet/'
+    weight = 20

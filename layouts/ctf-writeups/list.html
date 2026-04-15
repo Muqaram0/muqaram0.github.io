@@ -1,0 +1,35 @@
+{{ define "main" }}
+  {{ .Scratch.Set "scope" "list" }}
+
+  <article class="ctf-writeups-page">
+    {{ partial "background/collector-dotgrid.html" . }}
+
+    <header class="ctf-archive-header">
+      {{ $lead := .Params.description | default "Writeups, methodology notes, and exploitation walkthroughs in a clean card layout." }}
+      <h1 class="text-4xl font-extrabold text-neutral-900 dark:text-neutral">{{ .Title }}</h1>
+      <p class="ctf-writeups-lead">{{ $lead }}</p>
+      {{ if .Content }}
+        <section class="ctf-archive-content prose dark:prose-invert max-w-prose mt-5">
+          {{ .Content }}
+        </section>
+      {{ end }}
+    </header>
+
+    {{ $pages := .RegularPagesRecursive.ByDate.Reverse }}
+    {{ if gt (len $pages) 0 }}
+      <section class="recent-writeups-grid ctf-writeups-grid w-full">
+        {{ range (.Paginate $pages 18).Pages }}
+          {{ partial "article-link/recent-writeup-card.html" . }}
+        {{ end }}
+      </section>
+      {{ partial "pagination.html" . }}
+    {{ else }}
+      <section class="mt-10 prose dark:prose-invert">
+        <p class="py-8 border-t">
+          <em>{{ i18n "list.no_articles" | emojify }}</em>
+        </p>
+      </section>
+    {{ end }}
+  </article>
+
+{{ end }}

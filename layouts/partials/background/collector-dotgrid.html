@@ -1,0 +1,15 @@
+<div class="ctf-writeups-background nozoom" aria-hidden="true">
+  <div class="ctf-writeups-dotgrid"></div>
+  <canvas class="ctf-writeups-edge-canvas" data-ctf-edge-canvas></canvas>
+  <div class="ctf-writeups-vignette"></div>
+</div>
+
+{{ $edgeCollector := resources.Get "js/ctf-edge-collector.js" }}
+{{ if $edgeCollector }}
+  {{ $edgeCollector = $edgeCollector | resources.Minify | resources.Fingerprint (.Site.Params.fingerprintAlgorithm | default "sha512") }}
+  <script
+    defer
+    type="text/javascript"
+    src="{{ $edgeCollector.RelPermalink }}"
+    integrity="{{ $edgeCollector.Data.Integrity }}"></script>
+{{ end }}

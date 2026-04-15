@@ -1,0 +1,89 @@
+{{/* Homepage recent writeup card (no thumbnail, with tags) */}}
+{{ $page := .Page }}
+{{ $summary := "" }}
+
+{{ with .Summary }}
+  {{ $summary = . | plainify | strings.TrimSpace }}
+{{ end }}
+
+{{ if lt (len $summary) 40 }}
+  {{ $raw := .RawContent }}
+  {{ $clean := replaceRE `(?m)^#{1,6}\s.*$` "" $raw }}
+  {{ $clean = replaceRE `(?m)^[-*+]\s.*$` "" $clean }}
+  {{ $clean = replaceRE `(?m)^\|.*\|$` "" $clean }}
+  {{ $clean = replaceRE "(?m)^```.*$" "" $clean }}
+  {{ $clean = replaceRE `(?m)^{{<.*$` "" $clean }}
+  {{ $clean = replaceRE `(?m)^---$` "" $clean }}
+  {{ $clean = replaceRE "\\x60" "" $clean }}
+  {{ $clean = replaceRE `\*\*` "" $clean }}
+  {{ $chunks := split $clean "\n\n" }}
+  {{ range $chunks }}
+    {{ $chunk := . | plainify | strings.TrimSpace }}
+    {{ if and (eq $summary "") (ge (len $chunk) 55) (not (strings.HasPrefix $chunk "Title:")) }}
+      {{ $summary = $chunk }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if and (lt (len $summary) 40) .Params.description }}
+  {{ $summary = .Params.description | plainify | strings.TrimSpace }}
+{{ end }}
+
+{{ if lt (len $summary) 10 }}
+  {{ $summary = "Writeup in progress. Full writeup will be expanded soon." }}
+{{ end }}
+
+{{ $summary = strings.TrimSpace $summary }}
+{{ $articleLink := $page.RelPermalink }}
+{{ $isExternal := false }}
+{{ with $page.Params.externalUrl }}
+  {{ $articleLink = . }}
+  {{ $isExternal = true }}
+{{ end }}
+
+<article
+  class="recent-writeup-card article-link--card relative min-h-full min-w-full overflow-hidden rounded-xl border border-neutral-300 dark:border-neutral-600">
+  {{ if and .Draft .Site.Params.article.showDraftLabel }}
+    <span class="absolute top-0 right-0 m-2">
+      {{ partial "badge.html" (i18n "article.draft" | emojify) }}
+    </span>
+  {{ end }}
+
+  <div class="p-5">
+    <header>
+      <a
+        href="{{ $articleLink }}"
+        {{ if $isExternal }}target="_blank" rel="external noopener noreferrer"{{ end }}
+        class="recent-writeup-title not-prose decoration-primary-500 dark:text-neutral text-3xl font-bold text-neutral-800 hover:underline hover:underline-offset-2">
+        <h3 class="text-2xl leading-tight">
+          {{ .Title | emojify }}
+          {{ if $isExternal }}
+            <span class="cursor-default align-top text-xs text-neutral-400 dark:text-neutral-500">
+              <span class="rtl:hidden">&#8599;</span>
+              <span class="ltr:hidden">&#8598;</span>
+            </span>
+          {{ end }}
+        </h3>
+      </a>
+    </header>
+
+    <div class="recent-writeup-meta mt-2 text-sm text-neutral-500 dark:text-neutral-400">
+      {{ partial "article-meta/basic.html" . }}
+    </div>
+
+    {{ if $summary }}
+      <p class="recent-writeup-summary mt-3 text-base leading-relaxed text-neutral-700 dark:text-neutral-300 line-clamp-3">
+        {{ $summary | truncate 210 }}
+      </p>
+    {{ end }}
+
+    {{ with .Params.tags }}
+      <div class="recent-writeup-tags mt-4 flex flex-wrap gap-2">
+        {{ range first 8 . }}
+          {{ $tagURL := (printf "/tags/%s/" (urlize .)) | relLangURL }}
+          <a href="{{ $tagURL }}" class="recent-writeup-tag text-xs">{{ . }}</a>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+</article>

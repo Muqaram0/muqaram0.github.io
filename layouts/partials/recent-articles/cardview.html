@@ -1,0 +1,7 @@
+{{ $recentArticles := .Site.Params.homepage.showRecentItems | default 5 }}
+
+<section class="recent-writeups-grid w-full">
+  {{ range first $recentArticles (.Paginate (where .Site.RegularPages "Type" "in" .Site.Params.mainSections)).Pages }}
+    {{ partial "article-link/recent-writeup-card.html" . }}
+  {{ end }}
+</section>
