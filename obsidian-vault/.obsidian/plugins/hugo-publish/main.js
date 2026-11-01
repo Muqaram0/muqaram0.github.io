@@ -140,7 +140,7 @@ module.exports = class HugoPublishPlugin extends Plugin {
   }
 
   repoRoot() {
-    return path.resolve(this.app.vault.adapter.basePath, "..");
+    return "C:\\Users\\muqar\\Desktop\\zon\\Portfolio\\0xfatcat";
   }
 
   async publish(rawDestination) {
