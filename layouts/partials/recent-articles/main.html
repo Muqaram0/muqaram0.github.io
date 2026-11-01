@@ -1,0 +1,20 @@
+{{ $recentPages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
+{{ if and (.Site.Params.homepage.showRecent | default false) (gt (len $recentPages) 0) }}
+  <h2 class="recent-section-title mt-16 text-2xl font-extrabold mb-8">Latest writeups</h2>
+
+  {{ if and .Site.Params.homepage.cardView (not .Site.Params.homepage.cardViewScreenWidth) | default false }}
+    {{ partial "recent-articles/cardview.html" . }}
+  {{ else if and .Site.Params.homepage.cardView .Site.Params.homepage.cardViewScreenWidth | default false }}
+    {{ partial "recent-articles/cardview-fullwidth.html" . }}
+  {{ else }}
+    {{ partial "recent-articles/list.html" . }}
+  {{ end }}
+
+  {{ if .Site.Params.homepage.showMoreLink | default false }}
+    <div class="mt-10 flex justify-center">
+      <a class="hero-cta" href="{{ .Site.Params.homepage.showMoreLinkDest | default "/posts/" | relLangURL }}">
+        {{ i18n "recent.show_more" | markdownify }}
+      </a>
+    </div>
+  {{ end }}
+{{ end }}

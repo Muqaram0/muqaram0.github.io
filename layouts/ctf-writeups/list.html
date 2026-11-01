@@ -24,10 +24,13 @@
       </section>
       {{ partial "pagination.html" . }}
     {{ else }}
-      <section class="mt-10 prose dark:prose-invert">
-        <p class="py-8 border-t">
-          <em>{{ i18n "list.no_articles" | emojify }}</em>
-        </p>
+      <section class="section-empty-state">
+        <p class="section-empty-title">Nothing published here yet</p>
+        <p class="section-empty-text">New posts land here as soon as they are published. In the meantime, browse the tooling notes or the OSCP checklist.</p>
+        <div class="hero-cta-row">
+          <a class="hero-cta" href="{{ "tools/" | relLangURL }}">Tools</a>
+          <a class="hero-cta" href="{{ "cheatsheet/oscp-cheatsheet/" | relLangURL }}">OSCP checklist</a>
+        </div>
       </section>
     {{ end }}
   </article>

@@ -13,22 +13,22 @@
 [[main]]
   name = "Tools"
   pageRef = "tools"
-  weight = 10
-
-[[main]]
-  name = "cheatsheet"
-  pageRef = "cheatsheet"
-  weight = 20
-
-[[main]]
-  name = "ctf-writeups"
-  pageRef = "ctf-writeups"
   weight = 30
 
 [[main]]
-  name = "personal"
-  pageRef = "personal"
+  name = "Cheatsheet"
+  pageRef = "cheatsheet"
   weight = 35
+
+[[main]]
+  name = "Writeups"
+  pageRef = "ctf-writeups"
+  weight = 10
+
+[[main]]
+  name = "Personal"
+  pageRef = "personal"
+  weight = 20
 
 [[main]]
   name = "About"

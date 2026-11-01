@@ -52,7 +52,7 @@
               <span class="hero-typing-text">{{ $headlineText }}</span><span class="hero-typing-caret" aria-hidden="true"></span>
             </h2>
           {{ end }}
-          <div class="mt-3 mb-10 text-2xl">
+          <div class="mt-3 mb-8 text-2xl">
             {{ with .Site.Params.Author.links }}
               <div class="flex flex-wrap">
                 {{ range $links := . }}
@@ -76,7 +76,17 @@
               </div>
             {{ end }}
           </div>
-          <section class="prose dark:prose-invert w-full hero-intro-panel">{{ .Content }}</section>
+          <section class="prose dark:prose-invert w-full hero-intro-panel">
+            {{ .Content }}
+            <nav class="hero-cta-row" aria-label="Start here">
+              <a class="hero-cta hero-cta--primary" href="{{ "ctf-writeups/" | relLangURL }}">Writeups</a>
+              <a class="hero-cta" href="{{ "tools/" | relLangURL }}">Tools</a>
+              <a class="hero-cta" href="{{ "cheatsheet/oscp-cheatsheet/" | relLangURL }}">OSCP checklist</a>
+            </nav>
+          </section>
+          {{ with .Site.Params.Author.quote }}
+            <p class="hero-quote">&ldquo;{{ . }}&rdquo;</p>
+          {{ end }}
         </div>
       </div>
     </div>

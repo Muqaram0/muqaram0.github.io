@@ -1,7 +1,7 @@
 ---
 title: "Box Name"
 date: 2026-11-01
-draft: false
+draft: true
 description: "One line summary for the card"
 tags: ["windows", "medium"]
 categories: ["CTF Writeups"]
