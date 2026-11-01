@@ -1,0 +1,18 @@
+{{ define "main" }}
+  <div class="lost-background nozoom" aria-hidden="true">
+    <canvas class="hero-lily-field" data-lily-field="solo"></canvas>
+  </div>
+  <section class="lost-page hero-stage">
+    <p class="lost-code">404</p>
+    <h1 class="lost-title">Nothing grows here.</h1>
+    <p class="lost-text">The page you're looking for doesn't exist, or it wandered off into the field.</p>
+    <nav class="hero-cta-row" aria-label="Way back">
+      <a class="hero-cta hero-cta--primary" href="{{ "/" | relLangURL }}">Back home</a>
+      <a class="hero-cta" href="{{ "ctf-writeups/" | relLangURL }}">Writeups</a>
+    </nav>
+  </section>
+  {{ with resources.Get "js/lily-field.js" }}
+    {{ $lilyField := . | resources.Minify | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
+    <script defer src="{{ $lilyField.RelPermalink }}" integrity="{{ $lilyField.Data.Integrity }}"></script>
+  {{ end }}
+{{ end }}

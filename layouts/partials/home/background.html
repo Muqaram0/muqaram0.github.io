@@ -13,7 +13,7 @@
           </div>
         </div>
 
-        <div class="relative z-20 flex flex-col items-center justify-center px-1 py-1 text-center">
+        <div class="hero-stage relative z-20 flex flex-col items-center justify-center px-1 py-1 text-center">
           {{ with .Site.Params.Author.image }}
             {{ $authorImage := "" }}
             {{ if or (strings.HasPrefix . "http:") (strings.HasPrefix . "https:") }}

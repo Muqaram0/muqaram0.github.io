@@ -2,7 +2,13 @@
   <div class="ctf-writeups-dotgrid"></div>
   <canvas class="ctf-writeups-edge-canvas" data-ctf-edge-canvas></canvas>
   <div class="ctf-writeups-vignette"></div>
+  <canvas class="lily-strip" data-lily-field="strip"></canvas>
 </div>
+
+{{ with resources.Get "js/lily-field.js" }}
+  {{ $lilyField := . | resources.Minify | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
+  <script defer src="{{ $lilyField.RelPermalink }}" integrity="{{ $lilyField.Data.Integrity }}"></script>
+{{ end }}
 
 {{ $edgeCollector := resources.Get "js/ctf-edge-collector.js" }}
 {{ if $edgeCollector }}
