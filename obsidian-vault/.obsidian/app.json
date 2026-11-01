@@ -1,9 +1,0 @@
-{
-  "attachmentFolderPath": "attachments",
-  "newFileLocation": "folder",
-  "newFileFolderPath": "writeups",
-  "showLineNumber": true,
-  "strictLineBreaks": false,
-  "useMarkdownLinks": true,
-  "newLinkFormat": "relative"
-}

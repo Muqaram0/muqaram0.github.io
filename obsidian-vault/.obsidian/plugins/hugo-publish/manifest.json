@@ -1,9 +1,0 @@
-{
-  "id": "hugo-publish",
-  "name": "Hugo Publish",
-  "version": "1.0.0",
-  "minAppVersion": "1.4.0",
-  "description": "Publish the current note to the Hugo site and push it to GitHub.",
-  "author": "Muqaram",
-  "isDesktopOnly": true
-}
