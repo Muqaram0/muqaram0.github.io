@@ -1,4 +1,9 @@
-﻿:root {
+﻿html {
+  color-scheme: dark;
+  background-color: #000;
+}
+
+:root {
   --color-primary-50: 248, 250, 252;
   --color-primary-100: 236, 240, 246;
   --color-primary-200: 218, 225, 235;
@@ -1017,7 +1022,22 @@ html.dark {
 }
 
 .tools-body-layout {
-  align-items: flex-start;
+  align-items: stretch;
+  overflow: visible;
+}
+
+@media (min-width: 1024px) {
+  .tools-right-toc {
+    align-self: stretch;
+    height: auto;
+  }
+
+  .tools-right-toc > .toc {
+    position: sticky;
+    top: 140px;
+    z-index: 30;
+    align-self: flex-start;
+  }
 }
 
 .tools-main-column {
@@ -1033,6 +1053,7 @@ html.dark {
   .tools-right-toc {
     flex: 0 0 18.5rem;
     max-width: 18.5rem;
+    overflow: visible;
   }
 
   .tools-right-toc .toc-right {

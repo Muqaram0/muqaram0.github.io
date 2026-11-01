@@ -30,7 +30,7 @@
       {{ with $toolsPage }}
         {{ if in .TableOfContents "<ul" }}
           <div class="order-first lg:ms-auto px-0 lg:order-last lg:ps-8 lg:max-w-2xs tools-right-toc">
-            <div class="toc ps-5 print:hidden lg:sticky lg:top-10">
+            <div class="toc ps-5 print:hidden lg:sticky lg:top-[140px]">
               {{ partial "toc.html" . }}
             </div>
           </div>
