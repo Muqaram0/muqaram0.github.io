@@ -7,7 +7,10 @@
   var ctx = canvas.getContext("2d");
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var FRAME_MS = 1000 / 40;
-  var dpr, w, h, horizon, flowers, motes, rafId, lastFrame = 0, lastTime = 0;
+  var Z_NEAR = 0.55;
+  var Z_FAR = 22;
+  var SPEED = 0.3;
+  var dpr, w, h, horizon, groundK, flowers, motes, rafId, lastFrame = 0, lastTime = 0;
   var start = performance.now();
   var glow = makeGlowSprite();
 
@@ -27,6 +30,17 @@
     g.fillStyle = grad;
     g.fillRect(0, 0, 64, 64);
     return sprite;
+  }
+
+  function spawnFlower(f, z) {
+    f.u = rand(-1.12, 1.12);
+    f.z = z;
+    f.rot = rand(0, Math.PI * 2);
+    f.phase = rand(0, Math.PI * 2);
+    f.lean = rand(-0.06, 0.06);
+    f.height = rand(0.85, 1.15);
+    f.twinkle = Math.random() < 0.14 ? { rate: rand(0.6, 1.6), phase: rand(0, Math.PI * 2) } : null;
+    return f;
   }
 
   function newMote(anywhere) {
@@ -50,60 +64,55 @@
     canvas.height = Math.round(h * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    horizon = h * (w < 700 ? 0.72 : 0.64);
-    var count = Math.max(320, Math.min(1150, Math.round((w * (h - horizon)) / 560)));
+    horizon = h * (w < 700 ? 0.72 : 0.66);
+    groundK = (h - horizon) * 1.1;
+
+    var count = Math.round(Math.max(700, Math.min(1700, w * 1.2)));
     flowers = [];
     for (var i = 0; i < count; i++) {
-      var depth = Math.pow(Math.random(), 1.9);
-      flowers.push({
-        x: rand(-20, w + 20),
-        y: horizon + 2 + depth * (h - horizon) * 0.95,
-        depth: depth,
-        scale: 0.16 + depth * 1.3,
-        rot: rand(0, Math.PI * 2),
-        phase: rand(0, Math.PI * 2),
-        lean: rand(-0.06, 0.06),
-        twinkle: Math.random() < 0.14 ? { rate: rand(0.6, 1.6), phase: rand(0, Math.PI * 2) } : null
-      });
+      flowers.push(spawnFlower({}, rand(Z_NEAR, Z_FAR)));
     }
-    flowers.sort(function (a, b) { return a.y - b.y; });
 
     motes = [];
     var moteCount = Math.max(24, Math.round(w / 16));
     for (var m = 0; m < moteCount; m++) motes.push(newMote(true));
   }
 
-  function wind(t, x) {
-    var gust = 0.55 + 0.45 * Math.sin(t * 0.32 - x * 0.0024);
-    return { gust: gust, wave: Math.sin(t * 1.05 - x * 0.011) * gust };
-  }
-
   function drawFlower(f, t) {
-    var s = f.scale;
-    var alpha = 0.12 + f.depth * 0.72;
+    var groundY = horizon + groundK / f.z;
+    var x = w / 2 + f.u * (w / 2) * (0.9 + 0.42 / f.z);
+    var s = Math.min(4.2, 2.4 / f.z) * f.height;
     var stemLen = 34 * s;
-    var air = wind(t, f.x);
-    var flutter = air.wave + Math.sin(t * 2.4 + f.phase) * 0.12;
-    var sway = (flutter * 0.17 + air.gust * 0.06 + f.lean) * stemLen;
+    var len = 14 * s;
 
-    var hx = f.x + sway;
-    var hy = f.y - stemLen + Math.abs(sway) * 0.12;
+    if (x < -len * 2 || x > w + len * 2 || groundY - stemLen - len > h) return;
+
+    var distance = (f.z - Z_NEAR) / (Z_FAR - Z_NEAR);
+    var alpha = 0.06 + 0.86 * Math.pow(1 - distance, 1.6);
+    if (f.z > Z_FAR - 3) alpha *= (Z_FAR - f.z) / 3;
+    if (alpha < 0.02) return;
+
+    var gust = 0.55 + 0.45 * Math.sin(t * 0.7 + f.z * 0.32);
+    var flutter = Math.sin(t * 1.15 + f.z * 0.55 - f.u * 2.2) * gust + Math.sin(t * 2.4 + f.phase) * 0.12;
+    var sway = (flutter * 0.17 + gust * 0.05 + f.lean) * stemLen;
+
+    var hx = x + sway;
+    var hy = groundY - stemLen + Math.abs(sway) * 0.12;
 
     ctx.strokeStyle = "rgba(226, 232, 240," + (alpha * 0.5) + ")";
-    ctx.lineWidth = Math.max(0.45, 0.85 * s);
+    ctx.lineWidth = Math.max(0.4, 0.85 * s);
     ctx.beginPath();
-    ctx.moveTo(f.x, f.y);
-    ctx.quadraticCurveTo(f.x + sway * 0.15, f.y - stemLen * 0.55, hx, hy);
+    ctx.moveTo(x, groundY);
+    ctx.quadraticCurveTo(x + sway * 0.15, groundY - stemLen * 0.55, hx, hy);
     ctx.stroke();
 
-    var len = 14 * s;
     var spin = flutter * 0.2;
     var trail = sway * 0.12;
     var tipsPath = s > 0.28 ? new Path2D() : null;
-    var r = Math.max(0.5, 0.82 * s);
+    var r = Math.max(0.5, 0.8 * s);
 
     ctx.strokeStyle = "rgba(244, 247, 252," + alpha + ")";
-    ctx.lineWidth = Math.max(0.4, 0.72 * s);
+    ctx.lineWidth = Math.max(0.4, 0.7 * s);
     ctx.beginPath();
     for (var k = 0; k < 12; k++) {
       var a = f.rot + (k / 12) * Math.PI * 2 + spin;
@@ -141,7 +150,7 @@
       if (pulse > 0.02) {
         var size = len * 3.4;
         ctx.globalCompositeOperation = "lighter";
-        ctx.globalAlpha = pulse * (0.35 + f.depth * 0.55);
+        ctx.globalAlpha = pulse * Math.min(1, alpha * 1.1);
         ctx.drawImage(glow, hx + trail * 0.5 - size / 2, hy - len * 0.5 - size / 2, size, size);
         ctx.globalAlpha = 1;
         ctx.globalCompositeOperation = "source-over";
@@ -154,8 +163,7 @@
     for (var i = 0; i < motes.length; i++) {
       var m = motes[i];
       if (dt) {
-        var air = wind(t, m.x);
-        m.x += (m.vx + air.wave * 10) * dt;
+        m.x += (m.vx + Math.sin(t * 1.1 - m.x * 0.01) * 8) * dt;
         m.y += (m.vy + Math.sin(t * 0.9 + m.phase) * 3) * dt;
         if (m.y < horizon - h * 0.2 || m.x > w + 20) motes[i] = m = newMote(false);
       }
@@ -172,14 +180,29 @@
   }
 
   function paint(t, dt) {
+    if (dt) {
+      for (var j = 0; j < flowers.length; j++) {
+        var f = flowers[j];
+        f.z -= SPEED * dt;
+        if (f.z < Z_NEAR) spawnFlower(f, Z_FAR + rand(0, 1));
+      }
+    }
+    flowers.sort(function (a, b) { return b.z - a.z; });
+
     ctx.clearRect(0, 0, w, h);
 
-    var mist = ctx.createLinearGradient(0, horizon - h * 0.14, 0, horizon + h * 0.08);
+    var ground = ctx.createLinearGradient(0, horizon, 0, h);
+    ground.addColorStop(0, "rgba(255, 255, 255, 0.04)");
+    ground.addColorStop(1, "rgba(255, 255, 255, 0)");
+    ctx.fillStyle = ground;
+    ctx.fillRect(0, horizon, w, h - horizon);
+
+    var mist = ctx.createLinearGradient(0, horizon - h * 0.12, 0, horizon + h * 0.06);
     mist.addColorStop(0, "rgba(255, 255, 255, 0)");
-    mist.addColorStop(0.65, "rgba(255, 255, 255, 0.06)");
+    mist.addColorStop(0.7, "rgba(255, 255, 255, 0.07)");
     mist.addColorStop(1, "rgba(255, 255, 255, 0)");
     ctx.fillStyle = mist;
-    ctx.fillRect(0, horizon - h * 0.14, w, h * 0.22);
+    ctx.fillRect(0, horizon - h * 0.12, w, h * 0.18);
 
     for (var i = 0; i < flowers.length; i++) drawFlower(flowers[i], t);
     drawMotes(t, dt);
