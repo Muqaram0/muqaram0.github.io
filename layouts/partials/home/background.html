@@ -6,11 +6,9 @@
       <div class="relative sm:overflow-hidden">
         <div class="fixed inset-0 pointer-events-none hero-static-layer">
           <div id="background-image" class="hero-static-scene nozoom" role="presentation" aria-hidden="true">
-            <div class="hero-static-image"></div>
             <div class="hero-static-dotgrid"></div>
             <div class="hero-static-dot-bulge"></div>
-            <div class="hero-static-side hero-static-side-left"></div>
-            <div class="hero-static-side hero-static-side-right"></div>
+            <canvas class="hero-lily-field" data-lily-field></canvas>
             <div class="hero-static-vignette"></div>
           </div>
         </div>
@@ -132,6 +130,10 @@
     }
   });
 </script>
+{{ with resources.Get "js/lily-field.js" }}
+  {{ $lilyField := . | resources.Minify | resources.Fingerprint ($.Site.Params.fingerprintAlgorithm | default "sha512") }}
+  <script defer src="{{ $lilyField.RelPermalink }}" integrity="{{ $lilyField.Data.Integrity }}"></script>
+{{ end }}
 {{ if .Site.Params.homepage.layoutBackgroundBlur | default false }}
   <div
     id="background-blur"
