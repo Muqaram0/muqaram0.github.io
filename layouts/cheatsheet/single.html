@@ -77,11 +77,11 @@
       </section>
     {{ else }}
       <section class="flex flex-col max-w-full mt-6 prose dark:prose-invert lg:flex-row tools-body-layout">
-        {{ $showToc := and (.Params.showTableOfContents | default true) (in .TableOfContents "<ul") }}
+        {{ $showToc := and (.Params.showTableOfContents | default true) (gt (len .Fragments.Identifiers) 0) }}
         {{ if $showToc }}
           <div class="order-first lg:ms-auto px-0 lg:order-last lg:ps-8 lg:max-w-2xs tools-right-toc">
             <div class="toc ps-5 print:hidden lg:sticky lg:top-[140px]">
-              {{ partial "toc.html" . }}
+              {{ partial "cheatsheet-toc.html" . }}
             </div>
           </div>
         {{ end }}

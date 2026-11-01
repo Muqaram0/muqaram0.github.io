@@ -38,8 +38,8 @@ Now, as a Computer Science Engineering student, I specialize in cybersecurity an
     <span class="about-timeline-title">Junior Penetration Tester (PT1) - TryHackMe</span>
   </div>
   <div class="about-timeline-item about-timeline-item--accent" role="listitem">
-    <span class="about-timeline-date">10/03/2026</span>
-    <span class="about-timeline-title">Started preparing for OSCP</span>
+    <span class="about-timeline-date">Sep 2026</span>
+    <span class="about-timeline-title">OffSec Certified Professional (OSCP/OSCP+) - OffSec</span>
   </div>
 </div>
 
