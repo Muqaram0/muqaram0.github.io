@@ -1,6 +1,40 @@
 ﻿(function () {
   "use strict";
 
+  var markdownChecks = Array.prototype.slice.call(
+    document.querySelectorAll(".cheatsheet-page .article-content input[type='checkbox']")
+  );
+  var markdownStorageKey = "markdown-checklist-state:" + window.location.pathname;
+  var markdownState = {};
+
+  try {
+    markdownState = JSON.parse(window.localStorage.getItem(markdownStorageKey)) || {};
+  } catch (_err) {
+    markdownState = {};
+  }
+
+  markdownChecks.forEach(function (input, index) {
+    var id = String(index);
+    input.disabled = false;
+    input.removeAttribute("disabled");
+    input.classList.add("interactive-check");
+
+    if (Object.prototype.hasOwnProperty.call(markdownState, id)) {
+      input.checked = Boolean(markdownState[id]);
+    } else {
+      markdownState[id] = input.checked;
+    }
+
+    input.addEventListener("change", function () {
+      markdownState[id] = input.checked;
+      window.localStorage.setItem(markdownStorageKey, JSON.stringify(markdownState));
+    });
+  });
+
+  if (markdownChecks.length > 0) {
+    window.localStorage.setItem(markdownStorageKey, JSON.stringify(markdownState));
+  }
+
   var root = document.querySelector("[data-cheatsheet-db]");
   if (!root) {
     return;
