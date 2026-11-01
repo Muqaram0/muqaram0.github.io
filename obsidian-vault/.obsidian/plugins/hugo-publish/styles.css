@@ -18,7 +18,7 @@
   font-weight: 600;
 }
 
-.hugo-publish-view input[type="text"] {
+.hugo-publish-view select {
   width: 100%;
   margin-bottom: 12px;
 }

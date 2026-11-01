@@ -85,18 +85,18 @@ class PublishView extends ItemView {
     });
 
     root.createEl("label", { text: "Section", attr: { for: "hugo-dest" } });
-    const input = root.createEl("input", {
-      type: "text",
-      attr: {
-        id: "hugo-dest",
-        list: "hugo-dest-list",
-        placeholder: "ctf-writeups or personal",
-      },
+    const input = root.createEl("select", {
+      attr: { id: "hugo-dest" },
+    });
+    input.createEl("option", {
+      text: "CTF Writeups",
+      attr: { value: "ctf-writeups" },
+    });
+    input.createEl("option", {
+      text: "Personal",
+      attr: { value: "personal" },
     });
     input.value = this.plugin.settings.destination || "ctf-writeups";
-    const list = root.createEl("datalist", { attr: { id: "hugo-dest-list" } });
-    list.createEl("option", { attr: { value: "ctf-writeups" } });
-    list.createEl("option", { attr: { value: "personal" } });
 
     const button = root.createEl("button", { text: "Push to site" });
     button.addEventListener("click", async () => {
