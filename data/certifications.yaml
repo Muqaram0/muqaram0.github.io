@@ -1,0 +1,110 @@
+# Rendered on /certifications/ in the order listed.
+# level: Professional | Practitioner | Foundational
+# verify: optional credential URL; the card shows a "Verify" link when set.
+
+- name: "OffSec Certified Professional (OSCP / OSCP+)"
+  short: "OSCP+"
+  issuer: "OffSec"
+  date: "Sep 2026"
+  level: "Professional"
+  featured: true
+  summary: >-
+    OffSec's flagship penetration testing certification, earned through the PEN-200 course.
+    The exam is a 24-hour, proctored, hands-on assessment: compromise a set of standalone
+    machines and a full Active Directory environment, then submit a professional penetration
+    test report. OSCP+ is the current, time-bound version of the credential.
+  skills:
+    - "Enumeration"
+    - "Exploitation"
+    - "Privilege escalation"
+    - "Active Directory"
+    - "Pivoting"
+    - "Reporting"
+  verify: ""
+
+- name: "Certified Red Team Professional (CRTP)"
+  short: "CRTP"
+  issuer: "Altered Security"
+  date: "Jun 2025"
+  level: "Professional"
+  featured: true
+  summary: >-
+    A hands-on Active Directory attack certification from the Attacking and Defending Active
+    Directory course. The 24-hour exam takes place in a fully patched, multi-domain lab and is
+    followed by a written report. It focuses on abusing AD features and misconfigurations
+    rather than exploits, using PowerShell and built-in Windows tooling.
+  skills:
+    - "Domain enumeration"
+    - "Kerberoasting"
+    - "Delegation abuse"
+    - "ACL abuse"
+    - "Trust attacks"
+    - "Persistence"
+  verify: ""
+
+- name: "Junior Penetration Tester (PT1)"
+  short: "PT1"
+  issuer: "TryHackMe"
+  date: "Aug 2025"
+  level: "Practitioner"
+  featured: false
+  summary: >-
+    TryHackMe's practical penetration testing certification. The exam is hands-on and covers
+    web application, network and Active Directory targets, with findings documented in a
+    report.
+  skills:
+    - "Web application testing"
+    - "Network testing"
+    - "Active Directory"
+    - "Reporting"
+  verify: ""
+
+- name: "eLearnSecurity Junior Penetration Tester (eJPTv2)"
+  short: "eJPT"
+  issuer: "INE Security"
+  date: "Jan 2025"
+  level: "Practitioner"
+  featured: false
+  summary: >-
+    An entry-level, fully practical certification. The 48-hour exam runs in a live lab and
+    tests assessment methodology, host and network auditing, host and network penetration
+    testing, and web application testing.
+  skills:
+    - "Reconnaissance"
+    - "Host and network testing"
+    - "Web application testing"
+    - "Metasploit"
+  verify: ""
+
+- name: "Certified in Cybersecurity (CC)"
+  short: "CC"
+  issuer: "ISC2"
+  date: "Apr 2024"
+  level: "Foundational"
+  featured: false
+  summary: >-
+    ISC2's entry-level certification covering the core of the field: security principles,
+    business continuity, disaster recovery and incident response, access control, network
+    security, and security operations.
+  skills:
+    - "Security principles"
+    - "Access control"
+    - "Network security"
+    - "Incident response"
+  verify: ""
+
+- name: "Career Essentials in Cybersecurity"
+  short: "MS"
+  issuer: "Microsoft and LinkedIn"
+  date: "Feb 2024"
+  level: "Foundational"
+  featured: false
+  summary: >-
+    A Microsoft and LinkedIn learning path introducing security fundamentals, the threat
+    landscape, identity and access management, and common security tools, completed with
+    an assessment.
+  skills:
+    - "Security fundamentals"
+    - "Threat landscape"
+    - "Identity and access"
+  verify: ""

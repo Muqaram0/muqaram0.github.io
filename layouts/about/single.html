@@ -16,4 +16,10 @@
       {{ .Content }}
     </section>
   </article>
+
+  <script>
+    document.querySelectorAll("[data-timeline-scroll]").forEach(function (el) {
+      el.scrollLeft = el.scrollWidth;
+    });
+  </script>
 {{ end }}

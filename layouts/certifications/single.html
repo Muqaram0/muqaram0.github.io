@@ -1,0 +1,41 @@
+{{ define "main" }}
+  {{ .Scratch.Set "scope" "single" }}
+  <article class="ctf-writeups-page certs-page">
+    {{ partial "background/collector-dotgrid.html" . }}
+
+    <header class="certs-header">
+      <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+        {{ .Title | emojify }}
+      </h1>
+      {{ with .Description }}
+        <p class="certs-lead">{{ . }}</p>
+      {{ end }}
+    </header>
+
+    {{ with .Content }}
+      <section class="mt-6 prose dark:prose-invert max-w-prose">{{ . }}</section>
+    {{ end }}
+
+    <section class="certs-grid" aria-label="Certifications">
+      {{ range hugo.Data.certifications }}
+        <article class="cert-card{{ if .featured }} cert-card--featured{{ end }}">
+          <div class="cert-card-top">
+            <span class="cert-card-badge" aria-hidden="true">{{ .short }}</span>
+            <span class="cert-card-level">{{ .level }}</span>
+          </div>
+          <h2 class="cert-card-title">{{ .name }}</h2>
+          <p class="cert-card-meta">{{ .issuer }} · {{ .date }}</p>
+          <p class="cert-card-summary">{{ .summary }}</p>
+          {{ with .skills }}
+            <ul class="cert-card-skills" aria-label="Skills">
+              {{ range . }}<li class="recent-writeup-tag">{{ . }}</li>{{ end }}
+            </ul>
+          {{ end }}
+          {{ with .verify }}
+            <a class="cert-card-verify" href="{{ . }}" target="_blank" rel="noopener noreferrer">Verify credential →</a>
+          {{ end }}
+        </article>
+      {{ end }}
+    </section>
+  </article>
+{{ end }}

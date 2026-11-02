@@ -604,14 +604,61 @@ html.dark {
   max-width: 54rem;
 }
 
+.about-timeline-scroll {
+  margin-top: 1.4rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.35) transparent;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 1.5rem, #000 calc(100% - 1.5rem), transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 1.5rem, #000 calc(100% - 1.5rem), transparent 100%);
+}
+
+.about-timeline-scroll:focus-visible {
+  outline: 1px solid rgba(255, 255, 255, 0.6);
+  outline-offset: 4px;
+}
+
+.about-timeline-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.about-timeline-scroll::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
 .about-timeline {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-auto-flow: column;
+  grid-auto-columns: 10.5rem;
   gap: 0.9rem;
-  margin-top: 1.4rem;
-  margin-bottom: 1.2rem;
-  padding-top: 1.55rem;
+  width: max-content;
+  margin: 0;
+  padding: 1.55rem 1.5rem 1rem;
+}
+
+.about-timeline-kind {
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.about-timeline-item--work::before {
+  border-radius: 3px;
+}
+
+.about-timeline-hint {
+  margin-top: 0.4rem;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.about-timeline-item {
+  scroll-snap-align: start;
 }
 
 .about-timeline::before {
@@ -699,11 +746,23 @@ html.dark {
 }
 
 @media (max-width: 980px) {
+  .about-timeline-scroll {
+    overflow-x: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .about-timeline-hint-scroll {
+    display: none;
+  }
+
   .about-timeline {
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
     grid-template-columns: 1fr;
+    width: auto;
     gap: 0.9rem;
-    padding-top: 0.12rem;
-    padding-left: 1.45rem;
+    padding: 0.12rem 0 0 1.45rem;
   }
 
   .about-timeline::before {
@@ -732,6 +791,123 @@ html.dark {
   .about-timeline-item:nth-child(even)::after {
     display: none;
   }
+}
+
+.certs-header {
+  margin-top: 2.5rem;
+  max-width: 72rem;
+}
+
+.certs-lead {
+  margin-top: 0.9rem;
+  max-width: 56rem;
+  color: rgba(233, 238, 248, 0.9);
+  font-size: 1.04rem;
+  line-height: 1.72;
+}
+
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  gap: 1.1rem;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+  max-width: 72rem;
+}
+
+.cert-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.25rem 1.3rem 1.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 16px;
+  background:
+    linear-gradient(150deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02) 42%, rgba(255, 255, 255, 0.06)),
+    rgba(3, 6, 10, 0.46);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+
+.cert-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.08), 0 14px 32px rgba(0, 0, 0, 0.5);
+}
+
+.cert-card--featured {
+  border-color: rgba(255, 255, 255, 0.34);
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.07);
+}
+
+.cert-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.cert-card-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3.2rem;
+  height: 2.2rem;
+  padding: 0 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
+}
+
+.cert-card-level {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.cert-card-title {
+  margin: 0.2rem 0 0;
+  font-size: 1.08rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #f4f6fa;
+}
+
+.cert-card-meta {
+  margin: 0;
+  font-size: 0.82rem;
+  color: rgba(209, 213, 219, 0.8);
+}
+
+.cert-card-summary {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: rgba(229, 231, 235, 0.92);
+}
+
+.cert-card-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: auto 0 0;
+  padding: 0.4rem 0 0;
+  list-style: none;
+}
+
+.cert-card-verify {
+  font-size: 0.85rem;
+  color: rgb(var(--color-primary-300));
+}
+
+.cert-card-verify:hover {
+  color: #fff;
 }
 
 .tools-catalog-page {
